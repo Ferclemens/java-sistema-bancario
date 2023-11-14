@@ -2,6 +2,7 @@ package org.sistemaBancario.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Cliente {
     private int id;
@@ -66,10 +67,9 @@ public class Cliente {
         }
     }
 
-
     /*
-    * agregarCuenta()
-    * eliminarCuenta()
+
+
     * verSaldo()
     * */
 }
