@@ -1,19 +1,21 @@
-package org.sistemaBancario.CuentaBancaria;
+package org.sistemaBancario.domain;
 
 
-import org.sistemaBancario.Cliente.Cliente;
+import org.sistemaBancario.domain.Cliente;
 
 public class CuentaBancaria {
-    int cuentaID;
-    Cliente titular;
-    double saldo;
+    private int cuentaID;
+    private Cliente titular;
+    private String tipo;
+    private double saldo;
 
     public CuentaBancaria() {
     }
 
-    public CuentaBancaria(int cuentaID, Cliente titular, double saldo) {
+    public CuentaBancaria(int cuentaID, Cliente titular, String tipo, double saldo) {
         this.cuentaID = cuentaID;
         this.titular = titular;
+        this.tipo = tipo;
         this.saldo = saldo;
     }
 
@@ -31,6 +33,14 @@ public class CuentaBancaria {
 
     public void setTitular(Cliente titular) {
         this.titular = titular;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public double getSaldo() {
