@@ -17,9 +17,11 @@ public class App
         banco.agregarCliente(cliente2);
         //abrimos una cuenta al cliente creado
         //banco.abrirCuenta();
-        //banco.agregarCuenta(cliente1);
-        banco.eliminarCuenta(cliente1);
-        banco.listarClientes();
+        banco.agregarCuenta(cliente1);
+        banco.agregarCuenta(cliente1);
+        //banco.eliminarCuenta(cliente1);
+        //banco.listarClientes();
+        banco.verSaldo(cliente1);
 
 
 

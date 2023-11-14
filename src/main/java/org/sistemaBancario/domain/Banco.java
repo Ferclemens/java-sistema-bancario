@@ -85,7 +85,7 @@ public class Banco {
             System.out.println("Error. Seleccione una de las 2 opciones de cuenta.");
         }
         System.out.println("Cuenta nueva creada con éxito");
-        datos.close();
+        //datos.close();
     }
     public void eliminarCuenta(Cliente cliente) {
         if(clientes.contains(cliente)){
@@ -95,11 +95,31 @@ public class Banco {
             System.out.println("cliente no encontrado");
         }
     }
+    public void verSaldo(Cliente cliente) {
+        if(clientes.contains(cliente)){
+            double saldoTotal = 0.0;
+            System.out.println("-----------Cliente------------" +
+                    "\nID: "+ cliente.getId() + "| nombre: " + cliente.getNombre() +
+                    "\n-----------Cuenta/s-----------");
+            for (CuentaBancaria cuenta: cliente.getCuentasBancarias()) {
+                    saldoTotal += cuenta.getSaldo();
+                    System.out.println("ID: " + cuenta.getCuentaID() + "| tipo: " + cuenta.getTipo() +
+                            "\nsaldo: " + cuenta.getSaldo() +
+                            "\n-----------------------------");
+                }
+            System.out.println("SALDO TOTAL: " + saldoTotal);
+            }  else {
+            System.out.println("cliente no encontrado");
+        }
+
+
+
+    }
     /*
      * abrirCuenta() --> OK
      * listarClientes() --> OK
      * agregarCuenta(cliente) --> OK
      * eliminarCuenta() --> OK
-     * verSaldo()
+     * verSaldo() --> OK
      * */
 }
