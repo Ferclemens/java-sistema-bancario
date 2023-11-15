@@ -51,13 +51,4 @@ public class CuentaBancaria {
         this.saldo = saldo;
     }
 
-    public void depositar(CuentaBancaria cuenta){
-
-    }
-
-    /*
-    * depositar()
-    * retirar()
-    * verSaldo()
-    * */
 }

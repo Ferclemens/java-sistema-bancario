@@ -45,6 +45,9 @@ public class App
                 case 6:
                     banco.depositar();
                     break;
+                case 7:
+                    banco.retirar();
+                    break;
                 default:
                     System.out.println("### Opción inválida ###");
                     System.out.println("---------------------------------------------");
