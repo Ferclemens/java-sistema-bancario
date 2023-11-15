@@ -52,9 +52,11 @@ public class Banco {
             cliente.getCuentasBancarias().add(cuenta);
         } else {
             System.out.println("Error. Seleccione una de las 2 opciones de cuenta.");
+            System.out.println("--------------------------------------------------");
         }
         getClientes().add(cliente);
         System.out.println("### Cliente nuevo creado con éxito ###");
+        System.out.println("---------------------------------------------");
         listarClientes();
         //no tengo que cerrar el Scanner porque sino da error "NoSuchElementException"
         //datos.close();
@@ -92,9 +94,11 @@ public class Banco {
                     clienteSeleccionado.getCuentasBancarias().add(cuenta);
                 } else {
                     System.out.println("Error. Seleccione una de las 2 opciones de cuenta.");
+                    System.out.println("--------------------------------------------------");
                 }
             } else {
                 System.out.println("No existe cliente");
+                System.out.println("---------------------------------------------");
             }
         }
         System.out.println("### Cuenta nueva creada con éxito ###");
@@ -114,9 +118,11 @@ public class Banco {
                 clienteSeleccionado = cliente;
                 clientes.remove(clienteSeleccionado);
                 System.out.println("### cliente eliminado con éxito ###");
+                System.out.println("---------------------------------------------");
                 break;
             } else {
                 System.out.println("### cliente no encontrado ###");
+                System.out.println("---------------------------------------------");
             }
         }
     }
@@ -140,17 +146,48 @@ public class Banco {
                             " | saldo: " + cuenta.getSaldo());
                 }
                 System.out.println("SALDO TOTAL: " + saldoTotal);
-                System.out.println("--------------------------------");
+                System.out.println("---------------------------------------------");
             } else {
                 System.out.println("### cliente no encontrado ###");
+                System.out.println("---------------------------------------------");
             }
         }
     }
-    /*
-     * abrirCuenta() --> OK
-     * listarClientes() --> OK
-     * agregarCuenta(cliente) --> OK
-     * eliminarCuenta() --> OK
-     * verSaldo() --> OK
-     * */
+    public void depositar(){
+        System.out.println("### DEPOSITAR SALDO EN CUENTA ###" );
+        Scanner datos = new Scanner(System.in);
+        listarClientes();
+        System.out.println("seleccione el ID del cliente para el deposito: ");
+        int id = datos.nextInt();
+        Cliente clienteSeleccionado;
+        for (Cliente cliente: clientes) {
+            if(cliente.getId() == id) {
+                clienteSeleccionado = cliente;
+                System.out.println("---------------Cliente seleccionado----------------" +
+                        "\nID: "+ clienteSeleccionado.getId() + "| nombre: " + clienteSeleccionado.getNombre() +
+                        "\nCuenta/s: ");
+                for (CuentaBancaria cuenta: clienteSeleccionado.getCuentasBancarias()) {
+                    System.out.println("ID: " + cuenta.getCuentaID() + " | tipo: " + cuenta.getTipo() +
+                            " | saldo: " + cuenta.getSaldo());
+                }
+                System.out.println("seleccione el ID de la cuenta para el deposito: ");
+                int idCuenta = datos.nextInt();
+                System.out.println("ingrese el monto a depositar: ");
+                double deposito = datos.nextDouble();
+                for (CuentaBancaria cuenta: clienteSeleccionado.getCuentasBancarias()) {
+                    if(idCuenta == cuenta.getCuentaID()){
+                        cuenta.setSaldo(cuenta.getSaldo() + deposito);
+                        System.out.println("### Saldo cargado con éxito ### ");
+                        System.out.println("---------------------------------------------");
+                    } else {
+                        System.out.println("### No existe cuenta elegida ###");
+                        System.out.println("---------------------------------------------");
+                    }
+                }
+            } else {
+                System.out.println("### cliente no encontrado ###");
+                System.out.println("---------------------------------------------");
+            }
+        }
+    }
 }

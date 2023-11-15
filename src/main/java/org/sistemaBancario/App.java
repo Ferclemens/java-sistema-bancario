@@ -17,8 +17,10 @@ public class App
             System.out.println("1. Agregar cliente");
             System.out.println("2. Agregar cuenta a cliente existente");
             System.out.println("3. Listar clientes");
-            System.out.println("4. Ver saldos de cuenta de cliente existente");
-            System.out.println("5. Eliminar cliente existente");
+            System.out.println("4. Ver saldo/s de cuenta/s");
+            System.out.println("5. Eliminar cliente");
+            System.out.println("6. Depositar dinero");
+            System.out.println("7. Retirar dinero");
             System.out.println("0. Salir");
 
             System.out.println("Ingrese una opción: ");
@@ -40,6 +42,12 @@ public class App
                 case 5:
                     banco.eliminarCuenta();
                     break;
+                case 6:
+                    banco.depositar();
+                    break;
+                default:
+                    System.out.println("### Opción inválida ###");
+                    System.out.println("---------------------------------------------");
             }
         } while (seleccion != 0);
         System.out.println("### GRACIAS POR USAR BANCO PRINT-LINE ###");
