@@ -1,5 +1,9 @@
 package org.sistemaBancario.domain;
 
+import com.opencsv.CSVWriter;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -107,13 +111,14 @@ public class Banco implements org.sistemaBancario.servicios.Servicios {
                     clienteSeleccionado.getCuentasBancarias().add(cuenta);
                 }
                 System.out.println("--------------------------------------------------");
+                break;
             } else {
                 System.out.println("No existe cliente");
                 System.out.println("---------------------------------------------");
             }
         }
         System.out.println("### Cuenta nueva creada con éxito ###");
-        System.out.println("--------------------------------");
+        System.out.println("---------------------------------------------");
         //no tengo que cerrar el Scanner porque si agrego 2 cuentas de seguido da error "NoSuchElementException"
         //datos.close();
     }
@@ -164,6 +169,7 @@ public class Banco implements org.sistemaBancario.servicios.Servicios {
                 }
                 System.out.println("SALDO TOTAL: " + saldoTotal);
                 System.out.println("---------------------------------------------");
+                break;
             } else {
                 System.out.println("### cliente no encontrado ###");
                 System.out.println("---------------------------------------------");
@@ -197,6 +203,8 @@ public class Banco implements org.sistemaBancario.servicios.Servicios {
                         cuenta.setSaldo(cuenta.getSaldo() + deposito);
                         System.out.println("### Saldo cargado con éxito ### ");
                         System.out.println("---------------------------------------------");
+                        break;
+                        //el else salta aunque no corresponda
                     } else {
                         System.out.println("### No existe cuenta elegida ###");
                         System.out.println("---------------------------------------------");
@@ -242,6 +250,7 @@ public class Banco implements org.sistemaBancario.servicios.Servicios {
                             cuenta.setSaldo(cuenta.getSaldo()-retiro);
                             System.out.println("### Saldo retirado con éxito ### ");
                             System.out.println("---------------------------------------------");
+                            break;
                         }
                     } else {
                         System.out.println("### No existe cuenta elegida ###");
@@ -253,5 +262,31 @@ public class Banco implements org.sistemaBancario.servicios.Servicios {
                 System.out.println("---------------------------------------------");
             }
         }
+    }
+    @Override
+    public void exportarListaDeClientes() {
+        try(CSVWriter destino = new CSVWriter(new FileWriter("C:\\Users\\Fer\\Desktop\\ClientesBanco.csv"))){
+            //encabezados
+            String[] encabezado = {"ID", "Nombre", "direccion","CuentaID", "Tipo", "saldo"};
+            destino.writeNext(encabezado);
+            //datos
+
+            for (Cliente cliente: clientes) {
+                ArrayList<String> datos= new ArrayList<>();
+                datos.add(String.valueOf(cliente.getId()));
+                datos.add(cliente.getNombre());
+                datos.add(cliente.getDireccion());
+                for(CuentaBancaria cuenta: cliente.getCuentasBancarias()){
+                    datos.add(String.valueOf(cuenta.getCuentaID()));
+                    datos.add(cuenta.getTipo());
+                    datos.add(String.valueOf(cuenta.getSaldo()));
+                }
+                destino.writeNext(datos.toArray(new String[0]));
+            }
+
+        } catch(IOException e) {
+            System.out.println("Ocurrio un error " + e.getMessage());
+        }
+
     }
 }

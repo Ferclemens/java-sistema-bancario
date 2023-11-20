@@ -49,9 +49,15 @@ public class App
                 case 7:
                     banco.retirar();
                     break;
+                case 8:
+                    banco.exportarListaDeClientes();
+                    break;
                 default:
-                    System.out.println("### Opción inválida ###");
-                    System.out.println("---------------------------------------------");
+                    if(seleccion != 0){
+                        System.out.println("### Opción inválida ###");
+                        System.out.println("---------------------------------------------");
+                        break;
+                    }
             }
         } while (seleccion != 0);
         System.out.println("### GRACIAS POR USAR BANCO PRINT-LINE ###");
@@ -66,8 +72,8 @@ public class App
         //  (-)  que sea editable intereses y sobregiro
         //  (-)  aplicar intereses
         //  (-)  funcion exportar CSV
-        //  (x)  ver como implementar interfaces y refactorizar
-        //  (X)  BUG: IDs de cuentas no funciona.
-        //  (-)  BUG: se dispara el else en varios if de selección.
+        //  (x)  aplicar interface
+        //  (x)  BUG: IDs de cuentas no funciona.
+        //  (x)  BUG: se dispara el else en varios if de selección.
     }
 }

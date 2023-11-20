@@ -61,10 +61,5 @@ public class Cliente {
         System.out.println("------------------Cliente-------------------" +
                 "\nID: "+ id +" | nombre: " + nombre +" | dirección: " + direccion);
         System.out.println("--------------------------------------------");
-//        for (CuentaBancaria cuenta: cuentas) {
-//            System.out.println("ID: " + cuenta.getCuentaID() +  " | tipo: " + cuenta.getTipo() +
-//                    " | saldo: " + cuenta.getSaldo());
-//        }
-
     }
 }

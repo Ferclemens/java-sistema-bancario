@@ -18,4 +18,6 @@ public interface Servicios {
     void depositar();
 
     void retirar();
+
+    void exportarListaDeClientes();
 }
