@@ -21,6 +21,7 @@ public class App
             System.out.println("5. Eliminar cliente");
             System.out.println("6. Depositar dinero");
             System.out.println("7. Retirar dinero");
+            System.out.println("8. Obtener lista de clientes");
             System.out.println("0. Salir");
 
             System.out.println("Ingrese una opción: ");
@@ -54,19 +55,19 @@ public class App
             }
         } while (seleccion != 0);
         System.out.println("### GRACIAS POR USAR BANCO PRINT-LINE ###");
-        //creamos clientes hardcode
+
+        //hardcodeamos clientes
         //Cliente cliente1 = new Cliente(1, "Fernando", "Calle123");
         //banco.agregarCliente(cliente1);
         //Cliente cliente2 = new Cliente(2, "Ramon", "Calle321");
-        //banco.agregarCliente(cliente2);
 
 
-        //banco.agregarCuenta(cliente1);
-        //banco.agregarCuenta(cliente1);
-        //banco.eliminarCuenta(cliente1);
-        //banco.listarClientes();
-        //banco.verSaldo(cliente1);
-
-
+        //WIP:
+        //  (-)  que sea editable intereses y sobregiro
+        //  (-)  aplicar intereses
+        //  (-)  funcion exportar CSV
+        //  (x)  ver como implementar interfaces y refactorizar
+        //  (X)  BUG: IDs de cuentas no funciona.
+        //  (-)  BUG: se dispara el else en varios if de selección.
     }
 }
