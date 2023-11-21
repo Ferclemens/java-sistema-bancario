@@ -1,6 +1,7 @@
 package org.sistemaBancario.domain;
 
 import com.opencsv.CSVWriter;
+import org.sistemaBancario.servicios.BancoServicios;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Banco implements org.sistemaBancario.servicios.Servicios {
+public class Banco implements BancoServicios {
     private List<Cliente> clientes;
 
     public Banco() {
@@ -270,20 +271,22 @@ public class Banco implements org.sistemaBancario.servicios.Servicios {
             String[] encabezado = {"ID", "Nombre", "direccion","CuentaID", "Tipo", "saldo"};
             destino.writeNext(encabezado);
             //datos
-
             for (Cliente cliente: clientes) {
-                ArrayList<String> datos= new ArrayList<>();
-                datos.add(String.valueOf(cliente.getId()));
-                datos.add(cliente.getNombre());
-                datos.add(cliente.getDireccion());
                 for(CuentaBancaria cuenta: cliente.getCuentasBancarias()){
+                    //creamos un array list para guardar los datos de cada cliente
+                    ArrayList<String> datos= new ArrayList<>();
+                    datos.add(String.valueOf(cliente.getId()));
+                    datos.add(cliente.getNombre());
+                    datos.add(cliente.getDireccion());
                     datos.add(String.valueOf(cuenta.getCuentaID()));
                     datos.add(cuenta.getTipo());
                     datos.add(String.valueOf(cuenta.getSaldo()));
+                    //escribimos los datos guardados en el exportable
+                    destino.writeNext(datos.toArray(new String[0]));
                 }
-                destino.writeNext(datos.toArray(new String[0]));
             }
-
+            System.out.println("### Datos descargados con éxito ###");
+            System.out.println("---------------------------------------------");
         } catch(IOException e) {
             System.out.println("Ocurrio un error " + e.getMessage());
         }

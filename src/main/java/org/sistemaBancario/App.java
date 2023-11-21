@@ -2,6 +2,8 @@ package org.sistemaBancario;
 
 import org.sistemaBancario.domain.Banco;
 import org.sistemaBancario.domain.Cliente;
+import org.sistemaBancario.domain.CuentaCorriente;
+import org.sistemaBancario.domain.CuentaDeAhorro;
 
 import java.util.Scanner;
 
@@ -11,6 +13,22 @@ public class App
         System.out.println("### BIENVENIDOS AL BANCO PRINT-LINE ###");
         //inicializamos el banco
         Banco banco = new Banco();
+
+        //hardcode cliente1
+        Cliente cliente1 = new Cliente(1,"Fernando Clemens", "Calle 123");
+        banco.agregarCliente(cliente1);
+        CuentaDeAhorro cuenta1 = new CuentaDeAhorro(1, cliente1, "Cuenta de ahorro", 1000, 5.0);
+        cliente1.agregarCuentaBancaria(cuenta1);
+        CuentaCorriente cuenta2 = new CuentaCorriente(2, cliente1, "Cuenta Corriente", 2000, 100.0);
+        cliente1.agregarCuentaBancaria(cuenta2);
+        //hardcode cliente2
+        Cliente cliente2 = new Cliente(2,"Ruben Roman", "Calle 3211");
+        banco.agregarCliente(cliente2);
+        CuentaDeAhorro cuenta3 = new CuentaDeAhorro(1, cliente2, "Cuenta de ahorro", 500, 5.0);
+        cliente2.agregarCuentaBancaria(cuenta3);
+        CuentaCorriente cuenta4 = new CuentaCorriente(2, cliente2, "Cuenta Corriente", 3000, 100.0);
+        cliente2.agregarCuentaBancaria(cuenta4);
+
         int seleccion;
         do {
             System.out.println("### MENU PRINCIPAL ###");

@@ -2,7 +2,7 @@ package org.sistemaBancario.servicios;
 
 import org.sistemaBancario.domain.Cliente;
 
-public interface Servicios {
+public interface BancoServicios {
     void agregarCliente(Cliente cliente);
 
     void abrirCuenta();
