@@ -52,6 +52,10 @@ public class Cliente {
         this.cuentas = cuentasBancarias;
     }
 
+    public void agregarCuentaBancaria(CuentaBancaria cuenta){
+        cuentas.add(cuenta);
+    }
+
     public int proximaCuentaId() {
         int id = cuentas.toArray().length + 1;
         //System.out.println("Proximo ID " + id);
@@ -61,11 +65,5 @@ public class Cliente {
         System.out.println("------------------Cliente-------------------" +
                 "\nID: "+ id +" | nombre: " + nombre +" | dirección: " + direccion);
         System.out.println("--------------------------------------------");
-//        for (CuentaBancaria cuenta: cuentas) {
-//            System.out.println("ID: " + cuenta.getCuentaID() +  " | tipo: " + cuenta.getTipo() +
-//                    " | saldo: " + cuenta.getSaldo());
-//        }
-
     }
-
 }
