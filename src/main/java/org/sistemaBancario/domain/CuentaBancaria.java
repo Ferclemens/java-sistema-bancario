@@ -22,31 +22,24 @@ public class CuentaBancaria {
     public int getCuentaID() {
         return cuentaID;
     }
-
     public void setCuentaID(int cuentaID) {
         this.cuentaID = cuentaID;
     }
-
     public Cliente getTitular() {
         return titular;
     }
-
     public void setTitular(Cliente titular) {
         this.titular = titular;
     }
-
     public String getTipo() {
         return tipo;
     }
-
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-
     public double getSaldo() {
         return saldo;
     }
-
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }

@@ -1,23 +1,14 @@
 package org.sistemaBancario.servicios;
 
+import org.sistemaBancario.domain.Banco;
 import org.sistemaBancario.domain.Cliente;
 
 public interface BancoServicios {
-    void agregarCliente(Cliente cliente);
+    void agregarCliente(Banco banco, Cliente cliente);
 
-    void abrirCuenta();
+    void abrirCuenta(Banco banco);
 
-    void listarClientes();
+    void exportarListaDeClientes(Banco banco);
 
-    void agregarCuenta();
-
-    void eliminarCuenta();
-
-    void verSaldo();
-
-    void depositar();
-
-    void retirar();
-
-    void exportarListaDeClientes();
+    Cliente seleccionarCliente(Banco banco);
 }
