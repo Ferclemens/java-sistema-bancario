@@ -46,11 +46,6 @@ public class BancoServicioImpl implements BancoServicios{
         //no tengo que cerrar el Scanner porque sino da error "NoSuchElementException"
         //datos.close();
     }
-    @Override
-    public void agregarCliente(Banco banco, Cliente cliente){
-
-        banco.getClientes().add(cliente);
-    }
     public int proximoClienteId(Banco banco) {
         int id = banco.getClientes().toArray().length + 1;
         //System.out.println("Proximo ID " + id);
@@ -66,6 +61,27 @@ public class BancoServicioImpl implements BancoServicios{
                 cliente.detalle();
             }
         }
+    }
+
+    @Override
+    public void eliminarCuenta(Banco banco) {
+        System.out.println("### ELIMINAR CLIENTE ###" );
+        Scanner datos = new Scanner(System.in);
+        banco.listarClientes();
+        System.out.println("seleccione el ID del cliente a eliminar: ");
+        int id = datos.nextInt();
+        Cliente clienteAEliminar = null;
+        for (Cliente cliente: banco.getClientes()) {
+            if(cliente.getId() != id){
+                System.out.println("### cliente no encontrado ###");
+                System.out.println("---------------------------------------------");
+            } else {
+                clienteAEliminar = cliente;
+            }
+        }
+        banco.getClientes().remove(clienteAEliminar);
+        System.out.println("### cliente eliminado con éxito ###");
+        System.out.println("---------------------------------------------");
     }
     @Override
     public void exportarListaDeClientes(Banco banco) {

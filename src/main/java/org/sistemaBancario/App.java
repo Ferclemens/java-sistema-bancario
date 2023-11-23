@@ -44,9 +44,10 @@ public class App
             System.out.println("3. Listar clientes");
             System.out.println("4. Ver saldo/s de cuenta/s");
             System.out.println("5. Eliminar cliente");
-            System.out.println("6. Depositar dinero");
-            System.out.println("7. Retirar dinero");
-            System.out.println("8. Obtener lista de clientes");
+            System.out.println("6. Eliminar cuenta de cliente");
+            System.out.println("7. Depositar dinero");
+            System.out.println("8. Retirar dinero");
+            System.out.println("9. Obtener lista de clientes");
             System.out.println("0. Salir");
 
             System.out.println("Ingrese una opción: ");
@@ -72,16 +73,20 @@ public class App
                     cuentaServicio.verSaldo(clienteSeleccionado);
                     break;
                 case 5:
-                    //eliminar cliente
-                    clienteServicio.eliminarCuenta(bancoPrintLine);
+                    //eliminar cliente - OK
+                    bancoServicio.eliminarCuenta(bancoPrintLine);
                     break;
                 case 6:
-                    //banco.depositar();
+                    //eliminar cuenta de cliente - OK
+                    clienteServicio.eliminarCuenta(bancoPrintLine);
                     break;
                 case 7:
-                    //banco.retirar();
+                    //banco.depositar();
                     break;
                 case 8:
+                    //banco.retirar();
+                    break;
+                case 9:
                     //banco.exportarListaDeClientes();
                     break;
                 default:

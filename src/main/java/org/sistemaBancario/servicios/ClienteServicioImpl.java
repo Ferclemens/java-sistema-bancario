@@ -51,15 +51,27 @@ public class ClienteServicioImpl implements ClienteServicio{
         System.out.println("### ELIMINAR CUENTA DE CLIENTE ###" );
         Scanner datos = new Scanner(System.in);
         banco.listarClientes();
-        System.out.println("seleccione el ID del cliente a eliminar: ");
+        System.out.println("seleccione el ID del cliente: ");
         int id = datos.nextInt();
+        CuentaBancaria cuentaAEliminar = null;
         for (Cliente cliente: banco.getClientes()) {
             if(cliente.getId() != id){
                 System.out.println("### cliente no encontrado ###");
                 System.out.println("---------------------------------------------");
             } else {
-                banco.getClientes().remove(cliente);
-                System.out.println("### cliente eliminado con éxito ###");
+                System.out.println("seleccione el ID de la cuenta bancaria a eliminar: ");
+                int cuentaId = datos.nextInt();
+                for (CuentaBancaria cuenta: cliente.getCuentasBancarias()) {
+                    if (cuenta.getCuentaID() != cuentaId){
+                        //BUG: salta este print por mas que el id coincida (true)
+                        System.out.println("### cuenta no encontrada ###");
+                        System.out.println("---------------------------------------------");
+                    } else {
+                        cuentaAEliminar = cuenta;
+                    }
+                }
+                cliente.getCuentasBancarias().remove(cuentaAEliminar);
+                System.out.println("### cuenta eliminada con éxito ###");
                 System.out.println("---------------------------------------------");
             }
         }

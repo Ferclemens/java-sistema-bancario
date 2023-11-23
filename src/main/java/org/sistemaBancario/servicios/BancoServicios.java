@@ -4,9 +4,10 @@ import org.sistemaBancario.domain.Banco;
 import org.sistemaBancario.domain.Cliente;
 
 public interface BancoServicios {
-    void agregarCliente(Banco banco, Cliente cliente);
 
     void abrirCuenta(Banco banco);
+
+    void eliminarCuenta(Banco banco);
 
     void exportarListaDeClientes(Banco banco);
 
