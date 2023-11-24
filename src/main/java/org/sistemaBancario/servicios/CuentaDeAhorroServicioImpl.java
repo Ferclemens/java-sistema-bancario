@@ -4,6 +4,7 @@ import org.sistemaBancario.domain.CuentaBancaria;
 import org.sistemaBancario.domain.CuentaCorriente;
 import org.sistemaBancario.domain.CuentaDeAhorro;
 
+import java.lang.reflect.Field;
 import java.util.Scanner;
 
 public class CuentaDeAhorroServicioImpl implements CuentaDeAhorroServicio {
@@ -23,7 +24,32 @@ public class CuentaDeAhorroServicioImpl implements CuentaDeAhorroServicio {
         return cuentaEditada;
     }
     @Override
-    public double generarIntereses(){
-       return 0;
+    public CuentaDeAhorro SumarInteresesACuenta(CuentaBancaria cuenta){
+        //se utiliza reflexion (java.lang.reflect) para saber si cuenta tiene el
+        //atributo "intereses" correspondiente a una clase hija (CuentaDeAhorro)
+        //si es asi, se da accesibilidad a ese atributo (private) y lo guardo
+        //en una variable para su posterior uso.
+        double interesesDeCuenta = 0;
+        try {
+            Field campo = cuenta.getClass().getDeclaredField("intereses");
+            campo.setAccessible(true);
+            Object valor = campo.get(cuenta);
+            if(valor instanceof Double){
+                interesesDeCuenta = (Double) valor;
+            }
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+            return null;
+        }
+        CuentaDeAhorro cuentaEditada = new CuentaDeAhorro();
+        cuentaEditada.setCuentaID(cuenta.getCuentaID());
+        cuentaEditada.setTipo(cuenta.getTipo());
+        cuentaEditada.setIntereses(interesesDeCuenta);
+        double saldoConIntereses = cuenta.getSaldo() * (1 + interesesDeCuenta /100);
+        cuentaEditada.setSaldo(saldoConIntereses);
+        cuentaEditada.setTitular(cuenta.getTitular());
+        System.out.println("### Intereses sumados al saldo con éxito ###");
+        System.out.println("---------------------------------------------");
+        return cuentaEditada;
     }
 }

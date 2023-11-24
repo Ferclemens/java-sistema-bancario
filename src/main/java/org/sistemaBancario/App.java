@@ -72,7 +72,7 @@ public class App
                     bancoServicio.eliminarCuenta(bancoPrintLine);
                     break;
                 case 6:
-                    //Eliminar cuenta de cliente - OK
+                    //Eliminar cuenta de cliente
                     clienteServicio.eliminarCuenta(bancoPrintLine);
                     break;
                 case 7:
@@ -102,7 +102,7 @@ public class App
                     clienteSeleccionadoSobregiro.agregarCuenta(cuentaEditadaSobregiro);
                     break;
                 case 11:
-                    //editar intereses - OK
+                    //editar intereses de cuenta de ahorro- OK
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     Cliente clienteSeleccionadoIntereses = bancoServicio.seleccionarCliente(bancoPrintLine);
                     cuentaServicio.verSaldo(clienteSeleccionadoIntereses);
@@ -113,6 +113,13 @@ public class App
                     break;
                 case 12:
                     //generar intereses en cuenta de ahorro
+                    bancoServicio.obtenerClientes(bancoPrintLine);
+                    Cliente clienteSaldoConIntereses = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    cuentaServicio.verSaldo(clienteSaldoConIntereses);
+                    CuentaBancaria cuentaParaSumarIntereses = clienteServicio.seleccionarCuenta(clienteSaldoConIntereses);
+                    CuentaBancaria cuentaEditadaSaldo = cuentaDeAhorroServicio.SumarInteresesACuenta(cuentaParaSumarIntereses);
+                    clienteSaldoConIntereses.eliminarCuenta(cuentaParaSumarIntereses);
+                    clienteSaldoConIntereses.agregarCuenta(cuentaEditadaSaldo);
                     break;
                 default:
                     if(seleccion != 0){
@@ -126,12 +133,12 @@ public class App
 
         //WIP:
         //  (-)  Elaborar el README
-        //  (-)  que sea editable intereses y sobregiro
-        //  (-)  aplicar intereses
+        //  (x)  que sea editable intereses y sobregiro
+        //  (x)  aplicar intereses
         //  (x)  funcion exportar CSV
         //  (x)  aplicar interface
         //  (x)  BUG: IDs de cuentas no funciona.
-        //  (x)  BUG: se dispara el else en varios if de selección.
+        //  (-)  BUG: se dispara el else en varios if de selección.
         //  (x)  REFACTORIZAR.
     }
 }
