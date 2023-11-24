@@ -1,9 +1,7 @@
 package org.sistemaBancario;
 
-import org.sistemaBancario.domain.Banco;
-import org.sistemaBancario.domain.Cliente;
-import org.sistemaBancario.domain.CuentaCorriente;
-import org.sistemaBancario.domain.CuentaDeAhorro;
+import org.sistemaBancario.domain.*;
+import org.sistemaBancario.servicios.*;
 
 import java.util.Scanner;
 
@@ -11,23 +9,24 @@ public class App
 {
     public static void main( String[] args ) {
         System.out.println("### BIENVENIDOS AL BANCO PRINT-LINE ###");
-        //inicializamos el banco
-        Banco banco = new Banco();
+        //inicializamos el banco y los servicios
+        Banco bancoPrintLine = new Banco();
+        BancoServicioImpl bancoServicio = new BancoServicioImpl();
+        ClienteServicioImpl clienteServicio = new ClienteServicioImpl();
+        CuentaBancariaServicioImpl cuentaServicio = new CuentaBancariaServicioImpl();
+        CuentaCorrienteServicioImpl cuentaCorrienteServicio = new CuentaCorrienteServicioImpl();
+        CuentaDeAhorroServicioImpl cuentaDeAhorroServicio = new CuentaDeAhorroServicioImpl();
 
-        //hardcode cliente1
-        Cliente cliente1 = new Cliente(1,"Fernando Clemens", "Calle 123");
-        banco.agregarCliente(cliente1);
-        CuentaDeAhorro cuenta1 = new CuentaDeAhorro(1, cliente1, "Cuenta de ahorro", 1000, 5.0);
-        cliente1.agregarCuentaBancaria(cuenta1);
-        CuentaCorriente cuenta2 = new CuentaCorriente(2, cliente1, "Cuenta Corriente", 2000, 100.0);
-        cliente1.agregarCuentaBancaria(cuenta2);
-        //hardcode cliente2
-        Cliente cliente2 = new Cliente(2,"Ruben Roman", "Calle 3211");
-        banco.agregarCliente(cliente2);
-        CuentaDeAhorro cuenta3 = new CuentaDeAhorro(1, cliente2, "Cuenta de ahorro", 500, 5.0);
-        cliente2.agregarCuentaBancaria(cuenta3);
-        CuentaCorriente cuenta4 = new CuentaCorriente(2, cliente2, "Cuenta Corriente", 3000, 100.0);
-        cliente2.agregarCuentaBancaria(cuenta4);
+        //hardcode de clientes
+        Cliente cliente1 = new Cliente(1,"Leo Messi","calle 123");
+        bancoPrintLine.agregarCliente(cliente1);
+        CuentaCorriente cuentaCliente1 = new CuentaCorriente(1,cliente1,"Cuenta corriente",10000,300.0);
+        cliente1.agregarCuenta(cuentaCliente1);
+
+        Cliente cliente2 = new Cliente(2,"Fernando Clemens","Calle 321");
+        CuentaDeAhorro CuentaCliente2 = new CuentaDeAhorro(1,cliente2,"Cuenta de ahorro",2000, 5.0);
+        bancoPrintLine.agregarCliente(cliente2);
+        cliente2.agregarCuenta(CuentaCliente2);
 
         int seleccion;
         do {
@@ -37,38 +36,83 @@ public class App
             System.out.println("3. Listar clientes");
             System.out.println("4. Ver saldo/s de cuenta/s");
             System.out.println("5. Eliminar cliente");
-            System.out.println("6. Depositar dinero");
-            System.out.println("7. Retirar dinero");
-            System.out.println("8. Obtener lista de clientes");
+            System.out.println("6. Eliminar cuenta de cliente");
+            System.out.println("7. Depositar dinero");
+            System.out.println("8. Retirar dinero");
+            System.out.println("9. Obtener lista de clientes");
+            System.out.println("10. Editar sobregiro");
+            System.out.println("11. Editar intereses");
+            System.out.println("12. generar intereses");
             System.out.println("0. Salir");
 
-            System.out.println("Ingrese una opción: ");
+            System.out.println("Ingrese una opción del menú: ");
             Scanner scan = new Scanner(System.in);
             seleccion = scan.nextInt();
             switch (seleccion){
                 case 1:
-                    banco.abrirCuenta();
+                    //Abrir nueva cuenta bancaria - OK
+                    bancoServicio.abrirCuenta(bancoPrintLine);
                     break;
                 case 2:
-                    banco.agregarCuenta();
+                    //AgregarCuenta - OK
+                    clienteServicio.agregarCuenta(bancoPrintLine);
                     break;
                 case 3:
-                    banco.listarClientes();
+                    //Listar clientes del banco - OK
+                    bancoServicio.obtenerClientes(bancoPrintLine);
                     break;
                 case 4:
-                    banco.verSaldo();
+                    //Ver saldo de cuentas de un cliente - OK
+                    bancoServicio.obtenerClientes(bancoPrintLine);
+                    Cliente clienteParaVerSaldo = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    cuentaServicio.verSaldo(clienteParaVerSaldo);
                     break;
                 case 5:
-                    banco.eliminarCuenta();
+                    //Eliminar cliente - OK
+                    bancoServicio.eliminarCuenta(bancoPrintLine);
                     break;
                 case 6:
-                    banco.depositar();
+                    //Eliminar cuenta de cliente - OK
+                    clienteServicio.eliminarCuenta(bancoPrintLine);
                     break;
                 case 7:
-                    banco.retirar();
+                    //Depositar -OK
+                    bancoServicio.obtenerClientes(bancoPrintLine);
+                    Cliente clienteParaDepositar = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    cuentaServicio.depositar(clienteParaDepositar);
                     break;
                 case 8:
-                    banco.exportarListaDeClientes();
+                    //Retirar - OK
+                    bancoServicio.obtenerClientes(bancoPrintLine);
+                    Cliente clienteParaRetirar = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    cuentaServicio.retirar(clienteParaRetirar);
+                    break;
+                case 9:
+                    //Exportar lista de clientes -OK
+                    bancoServicio.exportarListaDeClientes(bancoPrintLine);
+                    break;
+                case 10:
+                    //editar sobregiro de cuenta corriente - OK
+                    bancoServicio.obtenerClientes(bancoPrintLine);
+                    Cliente clienteSeleccionadoSobregiro = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    cuentaServicio.verSaldo(clienteSeleccionadoSobregiro);
+                    CuentaBancaria cuentaParaEditarSobregiro = clienteServicio.seleccionarCuenta(clienteSeleccionadoSobregiro);
+                    CuentaBancaria cuentaEditadaSobregiro =  cuentaCorrienteServicio.editarSobregiro(cuentaParaEditarSobregiro);
+                    clienteSeleccionadoSobregiro.eliminarCuenta(cuentaParaEditarSobregiro);
+                    clienteSeleccionadoSobregiro.agregarCuenta(cuentaEditadaSobregiro);
+                    break;
+                case 11:
+                    //editar intereses - OK
+                    bancoServicio.obtenerClientes(bancoPrintLine);
+                    Cliente clienteSeleccionadoIntereses = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    cuentaServicio.verSaldo(clienteSeleccionadoIntereses);
+                    CuentaBancaria cuentaParaEditarIntereses = clienteServicio.seleccionarCuenta(clienteSeleccionadoIntereses);
+                    CuentaBancaria cuentaEditadaIntereses = cuentaDeAhorroServicio.editarIntereses(cuentaParaEditarIntereses);
+                    clienteSeleccionadoIntereses.eliminarCuenta(cuentaParaEditarIntereses);
+                    clienteSeleccionadoIntereses.agregarCuenta(cuentaEditadaIntereses);
+                    break;
+                case 12:
+                    //generar intereses en cuenta de ahorro
                     break;
                 default:
                     if(seleccion != 0){
@@ -80,18 +124,14 @@ public class App
         } while (seleccion != 0);
         System.out.println("### GRACIAS POR USAR BANCO PRINT-LINE ###");
 
-        //hardcodeamos clientes
-        //Cliente cliente1 = new Cliente(1, "Fernando", "Calle123");
-        //banco.agregarCliente(cliente1);
-        //Cliente cliente2 = new Cliente(2, "Ramon", "Calle321");
-
-
         //WIP:
+        //  (-)  Elaborar el README
         //  (-)  que sea editable intereses y sobregiro
         //  (-)  aplicar intereses
-        //  (-)  funcion exportar CSV
+        //  (x)  funcion exportar CSV
         //  (x)  aplicar interface
         //  (x)  BUG: IDs de cuentas no funciona.
         //  (x)  BUG: se dispara el else en varios if de selección.
+        //  (x)  REFACTORIZAR.
     }
 }
