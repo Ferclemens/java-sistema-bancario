@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class CuentaCorrienteServicioImpl implements CuentaCorrienteServicio{
     @Override
-    public CuentaCorriente cambiarSobregiro(CuentaBancaria cuenta){
+    public CuentaCorriente editarSobregiro(CuentaBancaria cuenta){
         CuentaCorriente cuentaEditada = new CuentaCorriente();
         cuentaEditada.setCuentaID(cuenta.getCuentaID());
         cuentaEditada.setTipo(cuenta.getTipo());
@@ -18,6 +18,8 @@ public class CuentaCorrienteServicioImpl implements CuentaCorrienteServicio{
         System.out.println("ingrese el nuevo monto de sobregiro: ");
         double sobregiro = datos.nextDouble();
         cuentaEditada.setLimiteSobregiro(sobregiro);
+        System.out.println("### sobregiro cambiado con éxito ###");
+        System.out.println("---------------------------------------------");
         return cuentaEditada;
     }
 }

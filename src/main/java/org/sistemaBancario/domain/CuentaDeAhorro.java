@@ -13,6 +13,9 @@ public class CuentaDeAhorro extends CuentaBancaria {
         this.intereses = intereses;
     }
 
+    public CuentaDeAhorro() {
+    }
+
     public double getIntereses() {
         return intereses;
     }

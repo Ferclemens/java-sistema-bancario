@@ -15,12 +15,18 @@ public class App
         ClienteServicioImpl clienteServicio = new ClienteServicioImpl();
         CuentaBancariaServicioImpl cuentaServicio = new CuentaBancariaServicioImpl();
         CuentaCorrienteServicioImpl cuentaCorrienteServicio = new CuentaCorrienteServicioImpl();
+        CuentaDeAhorroServicioImpl cuentaDeAhorroServicio = new CuentaDeAhorroServicioImpl();
 
         //hardcode de clientes
-        Cliente cliente1 = new Cliente(1,"Fernando Clemens","Calle 123");
+        Cliente cliente1 = new Cliente(1,"Leo Messi","calle 123");
         bancoPrintLine.agregarCliente(cliente1);
-        Cliente cliente2 = new Cliente(2,"Leo Messi","calle 321");
+        CuentaCorriente cuentaCliente1 = new CuentaCorriente(1,cliente1,"Cuenta corriente",10000,300.0);
+        cliente1.agregarCuenta(cuentaCliente1);
+
+        Cliente cliente2 = new Cliente(2,"Fernando Clemens","Calle 321");
+        CuentaDeAhorro CuentaCliente2 = new CuentaDeAhorro(1,cliente2,"Cuenta de ahorro",2000, 5.0);
         bancoPrintLine.agregarCliente(cliente2);
+        cliente2.agregarCuenta(CuentaCliente2);
 
         int seleccion;
         do {
@@ -34,9 +40,12 @@ public class App
             System.out.println("7. Depositar dinero");
             System.out.println("8. Retirar dinero");
             System.out.println("9. Obtener lista de clientes");
+            System.out.println("10. Editar sobregiro");
+            System.out.println("11. Editar intereses");
+            System.out.println("12. generar intereses");
             System.out.println("0. Salir");
 
-            System.out.println("Ingrese una opción: ");
+            System.out.println("Ingrese una opción del menú: ");
             Scanner scan = new Scanner(System.in);
             seleccion = scan.nextInt();
             switch (seleccion){
@@ -83,12 +92,26 @@ public class App
                     bancoServicio.exportarListaDeClientes(bancoPrintLine);
                     break;
                 case 10:
-                    //editar sobregiro de cuenta corriente
+                    //editar sobregiro de cuenta corriente - OK
                     bancoServicio.obtenerClientes(bancoPrintLine);
-                    Cliente clienteSeleccionado = bancoServicio.seleccionarCliente(bancoPrintLine);
-                    CuentaBancaria cuentaParaEditarSobregiro = clienteServicio.seleccionarCuenta(clienteSeleccionado);
-                    cuentaCorrienteServicio.cambiarSobregiro(cuentaParaEditarSobregiro);
+                    Cliente clienteSeleccionadoSobregiro = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    cuentaServicio.verSaldo(clienteSeleccionadoSobregiro);
+                    CuentaBancaria cuentaParaEditarSobregiro = clienteServicio.seleccionarCuenta(clienteSeleccionadoSobregiro);
+                    CuentaBancaria cuentaEditadaSobregiro =  cuentaCorrienteServicio.editarSobregiro(cuentaParaEditarSobregiro);
+                    clienteSeleccionadoSobregiro.eliminarCuenta(cuentaParaEditarSobregiro);
+                    clienteSeleccionadoSobregiro.agregarCuenta(cuentaEditadaSobregiro);
+                    break;
                 case 11:
+                    //editar intereses - OK
+                    bancoServicio.obtenerClientes(bancoPrintLine);
+                    Cliente clienteSeleccionadoIntereses = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    cuentaServicio.verSaldo(clienteSeleccionadoIntereses);
+                    CuentaBancaria cuentaParaEditarIntereses = clienteServicio.seleccionarCuenta(clienteSeleccionadoIntereses);
+                    CuentaBancaria cuentaEditadaIntereses = cuentaDeAhorroServicio.editarIntereses(cuentaParaEditarIntereses);
+                    clienteSeleccionadoIntereses.eliminarCuenta(cuentaParaEditarIntereses);
+                    clienteSeleccionadoIntereses.agregarCuenta(cuentaEditadaIntereses);
+                    break;
+                case 12:
                     //generar intereses en cuenta de ahorro
                     break;
                 default:
@@ -103,7 +126,7 @@ public class App
 
         //WIP:
         //  (-)  Elaborar el README
-        //  (x)  que sea editable intereses y sobregiro
+        //  (-)  que sea editable intereses y sobregiro
         //  (-)  aplicar intereses
         //  (x)  funcion exportar CSV
         //  (x)  aplicar interface

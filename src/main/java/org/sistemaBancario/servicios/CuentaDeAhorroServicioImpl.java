@@ -1,14 +1,26 @@
 package org.sistemaBancario.servicios;
 
+import org.sistemaBancario.domain.CuentaBancaria;
+import org.sistemaBancario.domain.CuentaCorriente;
+import org.sistemaBancario.domain.CuentaDeAhorro;
+
 import java.util.Scanner;
 
 public class CuentaDeAhorroServicioImpl implements CuentaDeAhorroServicio {
     @Override
-    public double intereses(){
+    public CuentaDeAhorro editarIntereses(CuentaBancaria cuenta){
+        CuentaDeAhorro cuentaEditada = new CuentaDeAhorro();
+        cuentaEditada.setCuentaID(cuenta.getCuentaID());
+        cuentaEditada.setTipo(cuenta.getTipo());
+        cuentaEditada.setSaldo(cuenta.getSaldo());
+        cuentaEditada.setTitular(cuenta.getTitular());
         Scanner datos = new Scanner(System.in);
-        System.out.println("porcentaje de intereses por mantener la cuenta de ahorro: ");
+        System.out.println("ingrese el nuevo porcentaje de intereses: ");
         double intereses = datos.nextDouble();
-        return intereses;
+        cuentaEditada.setIntereses(intereses);
+        System.out.println("### porcentaje de intereses cambiado con éxito ###");
+        System.out.println("---------------------------------------------");
+        return cuentaEditada;
     }
     @Override
     public double generarIntereses(){
