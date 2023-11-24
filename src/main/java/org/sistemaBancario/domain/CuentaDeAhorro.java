@@ -23,7 +23,5 @@ public class CuentaDeAhorro extends CuentaBancaria {
     public String getTipo() {
         return tipo;
     }
-    /*
-    * interesesGenerados()
-    * */
+
 }

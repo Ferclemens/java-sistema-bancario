@@ -62,7 +62,6 @@ public class BancoServicioImpl implements BancoServicios{
             }
         }
     }
-
     @Override
     public void eliminarCuenta(Banco banco) {
         System.out.println("### ELIMINAR CLIENTE ###" );
@@ -111,8 +110,6 @@ public class BancoServicioImpl implements BancoServicios{
         }
 
     }
-
-
     @Override
     public Cliente seleccionarCliente(Banco banco) {
         Cliente clienteSeleccionado = null;
@@ -126,8 +123,8 @@ public class BancoServicioImpl implements BancoServicios{
                 } else {
                     System.out.println("no existe cliente con ese ID, seleccione de nuevo.");
                     }
-                }
             }
-            return clienteSeleccionado;
         }
+        return clienteSeleccionado;
     }
+}

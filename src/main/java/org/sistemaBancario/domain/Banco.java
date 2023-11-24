@@ -34,4 +34,7 @@ public class Banco {
             }
         }
     }
+    public void agregarCliente(Cliente cliente){
+        clientes.add(cliente);
+    }
 }

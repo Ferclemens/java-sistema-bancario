@@ -1,13 +1,7 @@
 package org.sistemaBancario;
 
-import org.sistemaBancario.domain.Banco;
-import org.sistemaBancario.domain.Cliente;
-import org.sistemaBancario.domain.CuentaCorriente;
-import org.sistemaBancario.domain.CuentaDeAhorro;
-import org.sistemaBancario.servicios.BancoServicioImpl;
-import org.sistemaBancario.servicios.ClienteServicioImpl;
-import org.sistemaBancario.servicios.CuentaBancariaServicio;
-import org.sistemaBancario.servicios.CuentaBancariaServicioImpl;
+import org.sistemaBancario.domain.*;
+import org.sistemaBancario.servicios.*;
 
 import java.util.Scanner;
 
@@ -20,21 +14,13 @@ public class App
         BancoServicioImpl bancoServicio = new BancoServicioImpl();
         ClienteServicioImpl clienteServicio = new ClienteServicioImpl();
         CuentaBancariaServicioImpl cuentaServicio = new CuentaBancariaServicioImpl();
+        CuentaCorrienteServicioImpl cuentaCorrienteServicio = new CuentaCorrienteServicioImpl();
 
-        //hardcode cliente1
-//        Cliente cliente1 = new Cliente(1,"Fernando Clemens", "Calle 123");
-//        bancoServicio.agregarCliente(bancoPrintLine, cliente1);
-//        CuentaDeAhorro cuenta1 = new CuentaDeAhorro(1, cliente1, "Cuenta de ahorro", 1000, 5.0);
-//        cliente1.agregarCuentaBancaria(cuenta1);
-//        CuentaCorriente cuenta2 = new CuentaCorriente(2, cliente1, "Cuenta Corriente", 2000, 100.0);
-//        cliente1.agregarCuentaBancaria(cuenta2);
-        //hardcode cliente2
-//        Cliente cliente2 = new Cliente(2,"Ruben Roman", "Calle 3211");
-//        bancoServicio.agregarCliente(bancoPrintLine, cliente2);
-//        CuentaDeAhorro cuenta3 = new CuentaDeAhorro(1, cliente2, "Cuenta de ahorro", 500, 5.0);
-//        cliente2.agregarCuentaBancaria(cuenta3);
-//        CuentaCorriente cuenta4 = new CuentaCorriente(2, cliente2, "Cuenta Corriente", 3000, 100.0);
-//        cliente2.agregarCuentaBancaria(cuenta4);
+        //hardcode de clientes
+        Cliente cliente1 = new Cliente(1,"Fernando Clemens","Calle 123");
+        bancoPrintLine.agregarCliente(cliente1);
+        Cliente cliente2 = new Cliente(2,"Leo Messi","calle 321");
+        bancoPrintLine.agregarCliente(cliente2);
 
         int seleccion;
         do {
@@ -59,7 +45,7 @@ public class App
                     bancoServicio.abrirCuenta(bancoPrintLine);
                     break;
                 case 2:
-                    //agregarCuenta - OK
+                    //AgregarCuenta - OK
                     clienteServicio.agregarCuenta(bancoPrintLine);
                     break;
                 case 3:
@@ -67,27 +53,43 @@ public class App
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     break;
                 case 4:
-                    //ver saldo de cuentas de un cliente - OK
+                    //Ver saldo de cuentas de un cliente - OK
                     bancoServicio.obtenerClientes(bancoPrintLine);
-                    Cliente clienteSeleccionado = bancoServicio.seleccionarCliente(bancoPrintLine);
-                    cuentaServicio.verSaldo(clienteSeleccionado);
+                    Cliente clienteParaVerSaldo = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    cuentaServicio.verSaldo(clienteParaVerSaldo);
                     break;
                 case 5:
-                    //eliminar cliente - OK
+                    //Eliminar cliente - OK
                     bancoServicio.eliminarCuenta(bancoPrintLine);
                     break;
                 case 6:
-                    //eliminar cuenta de cliente - OK
+                    //Eliminar cuenta de cliente - OK
                     clienteServicio.eliminarCuenta(bancoPrintLine);
                     break;
                 case 7:
-                    //banco.depositar();
+                    //Depositar -OK
+                    bancoServicio.obtenerClientes(bancoPrintLine);
+                    Cliente clienteParaDepositar = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    cuentaServicio.depositar(clienteParaDepositar);
                     break;
                 case 8:
-                    //banco.retirar();
+                    //Retirar - OK
+                    bancoServicio.obtenerClientes(bancoPrintLine);
+                    Cliente clienteParaRetirar = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    cuentaServicio.retirar(clienteParaRetirar);
                     break;
                 case 9:
-                    //banco.exportarListaDeClientes();
+                    //Exportar lista de clientes -OK
+                    bancoServicio.exportarListaDeClientes(bancoPrintLine);
+                    break;
+                case 10:
+                    //editar sobregiro de cuenta corriente
+                    bancoServicio.obtenerClientes(bancoPrintLine);
+                    Cliente clienteSeleccionado = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    CuentaBancaria cuentaParaEditarSobregiro = clienteServicio.seleccionarCuenta(clienteSeleccionado);
+                    cuentaCorrienteServicio.cambiarSobregiro(cuentaParaEditarSobregiro);
+                case 11:
+                    //generar intereses en cuenta de ahorro
                     break;
                 default:
                     if(seleccion != 0){
@@ -101,12 +103,12 @@ public class App
 
         //WIP:
         //  (-)  Elaborar el README
-        //  (-)  que sea editable intereses y sobregiro
+        //  (x)  que sea editable intereses y sobregiro
         //  (-)  aplicar intereses
         //  (x)  funcion exportar CSV
         //  (x)  aplicar interface
         //  (x)  BUG: IDs de cuentas no funciona.
         //  (x)  BUG: se dispara el else en varios if de selección.
-        //  (-)  REFACTORIZAR.
+        //  (x)  REFACTORIZAR.
     }
 }

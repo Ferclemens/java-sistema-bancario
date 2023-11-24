@@ -22,10 +22,7 @@ public class CuentaCorriente extends CuentaBancaria {
     public String getTipo() {
         return tipo;
     }
-    public void detalle() {
-        System.out.println("Id:" + getCuentaID());
+
+    public CuentaCorriente() {
     }
-    /*
-     * sobregiro()
-     * */
 }

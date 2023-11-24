@@ -8,6 +8,7 @@ import org.sistemaBancario.domain.CuentaDeAhorro;
 import java.util.Scanner;
 
 public class CuentaBancariaServicioImpl implements CuentaBancariaServicio {
+
     @Override
     public void verSaldo(Cliente cliente) {
         System.out.println("### VER SALDOS DE CLIENTE ###" );
@@ -40,18 +41,18 @@ public class CuentaBancariaServicioImpl implements CuentaBancariaServicio {
         verSaldo(cliente);
         System.out.println("seleccione el ID de la cuenta para el deposito: ");
         int idCuenta = datos.nextInt();
-
         for (CuentaBancaria cuenta: cliente.getCuentasBancarias()) {
-            if(idCuenta == cuenta.getCuentaID()){
+            if(idCuenta != cuenta.getCuentaID()){
+                //BUG: salta el print por mas que no se cumple la condiciooooon!! t.t
+                System.out.println("### No existe cuenta elegida ###");
+                System.out.println("---------------------------------------------");
+            } else {
                 System.out.println("ingrese el monto a depositar: ");
                 double deposito = datos.nextDouble();
                 cuenta.setSaldo(cuenta.getSaldo() + deposito);
                 System.out.println("### Saldo cargado con éxito ### ");
                 System.out.println("---------------------------------------------");
-                break;
-            } else {
-                System.out.println("### No existe cuenta elegida ###");
-                System.out.println("---------------------------------------------");
+
             }
         }
 
@@ -80,10 +81,33 @@ public class CuentaBancariaServicioImpl implements CuentaBancariaServicio {
                     break;
                 }
             } else {
+                //BUG: salta el print iguaal!!
                 System.out.println("### No existe cuenta elegida ###");
                 System.out.println("---------------------------------------------");
             }
         }
     }
+
+//    public CuentaBancaria obtenerCuentaCorriente(Cliente cliente) {
+//        CuentaBancaria cuentaSeleccionada = null;
+//        if (cliente != null) {
+//            Scanner datos = new Scanner(System.in);
+//            verSaldo(cliente);
+//            System.out.println("seleccione el ID de la cuenta para el deposito: ");
+//            int idCuenta = datos.nextInt();
+//            for (CuentaBancaria cuenta : cliente.getCuentasBancarias()) {
+//                if (idCuenta == cuenta.getCuentaID() && cuenta instanceof CuentaCorriente) {
+//                    cuentaSeleccionada = cuenta;
+//                } else {
+//                    System.out.println("### No existe cuenta o no es tipo 'corriente'. ###");
+//                    System.out.println("---------------------------------------------");
+//                }
+//            }
+//        } else {
+//            System.out.println("### No existe cliente elegida ###");
+//            System.out.println("---------------------------------------------");
+//        }
+//        return cuentaSeleccionada;
+//    }
 }
 

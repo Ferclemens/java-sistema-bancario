@@ -30,11 +30,17 @@ public class ClienteServicioImpl implements ClienteServicio{
                 }
                 if (eleccion == 2) {
                     String tipo = "Cuenta Corriente";
-                    CuentaCorriente cuenta = new CuentaCorriente(cliente.proximaCuentaId(), clienteSeleccionado, tipo, saldo, 100.0);
+                    CuentaCorriente cuenta = new CuentaCorriente(cliente.proximaCuentaId(), clienteSeleccionado, tipo, saldo, 0.0);
+                    System.out.println("Ingrese el límite de sobregiro: ");
+                    double sobregiro = datos.nextDouble();
+                    cuenta.setLimiteSobregiro(sobregiro);
                     clienteSeleccionado.getCuentasBancarias().add(cuenta);
                 } else if (eleccion == 1) {
                     String tipo = "Cuenta de ahorro";
-                    CuentaDeAhorro cuenta = new CuentaDeAhorro(cliente.proximaCuentaId(), clienteSeleccionado, tipo, saldo, 5.0);
+                    CuentaDeAhorro cuenta = new CuentaDeAhorro(cliente.proximaCuentaId(), clienteSeleccionado, tipo, saldo, 0.0);
+                    System.out.println("Ingrese el porcentaje de intereses: ");
+                    double intereses = datos.nextDouble();
+                    cuenta.setIntereses(intereses);
                     clienteSeleccionado.getCuentasBancarias().add(cuenta);
                 }
                 System.out.println("--------------------------------------------------");
@@ -75,5 +81,22 @@ public class ClienteServicioImpl implements ClienteServicio{
                 System.out.println("---------------------------------------------");
             }
         }
+    }
+    @Override
+    public CuentaBancaria seleccionarCuenta(Cliente cliente) {
+        CuentaBancaria cuentaSeleccionada = null;
+        while (cuentaSeleccionada == null){
+            Scanner datos = new Scanner(System.in);
+            System.out.println("seleccione el ID de la cuenta: ");
+            int id = datos.nextInt();
+            for (CuentaBancaria cuenta: cliente.getCuentasBancarias()) {
+                if(cuenta.getCuentaID() == id){
+                    cuentaSeleccionada = cuenta;
+                } else {
+                    System.out.println("no existe cuenta con ese ID, seleccione de nuevo.");
+                }
+            }
+        }
+        return cuentaSeleccionada;
     }
 }
