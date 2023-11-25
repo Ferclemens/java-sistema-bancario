@@ -84,7 +84,7 @@ public class App
                     cuentaServicio.depositar(clienteParaDepositar);
                     break;
                 case 8:
-                    //Retirar - OK
+                    //Retirar - test manual OK
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     Cliente clienteParaRetirar = bancoServicio.seleccionarCliente(bancoPrintLine);
                     cuentaServicio.retirar(clienteParaRetirar);

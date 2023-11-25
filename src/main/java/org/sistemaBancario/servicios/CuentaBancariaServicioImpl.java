@@ -70,29 +70,38 @@ public class CuentaBancariaServicioImpl implements CuentaBancariaServicio {
         verSaldo(cliente);
         System.out.println("seleccione el ID de la cuenta para el retiro: ");
         int idCuenta = datos.nextInt();
+        CuentaBancaria cuentaParaRetirar = null;
         for (CuentaBancaria cuenta: cliente.getCuentasBancarias()) {
             if(idCuenta == cuenta.getCuentaID()){
-                System.out.println("ingrese el monto a retirar: ");
-                double retiro = datos.nextDouble();
-                double nuevoSaldo = cuenta.getSaldo() - retiro;
-                if(cuenta instanceof CuentaCorriente &&
-                    nuevoSaldo < (((CuentaCorriente) cuenta).getLimiteSobregiro() * -1)){
-                    System.out.println("------------------------------------------------------------------");
-                    System.out.println("retiro cancelado - El retiro excede el límite de sobregiro: "
-                    + ((CuentaCorriente) cuenta).getLimiteSobregiro());
-                    System.out.println("------------------------------------------------------------------");
-                } else {
-                    cuenta.setSaldo(cuenta.getSaldo()-retiro);
+                cuentaParaRetirar = cuenta;
+            }
+        }
+        if (cuentaParaRetirar != null) {
+            System.out.println("ingrese el monto a retirar: ");
+            double retiro = datos.nextDouble();
+            double nuevoSaldo = cuentaParaRetirar.getSaldo() - retiro;
+            if(cuentaParaRetirar instanceof CuentaCorriente &&
+                    nuevoSaldo < (((CuentaCorriente) cuentaParaRetirar).getLimiteSobregiro() * -1)){
+                System.out.println("------------------------------------------------------------------");
+                System.out.println("Retiro cancelado - El retiro excede el saldo disponible: " + cuentaParaRetirar.getSaldo()
+                        + " usd" + "\n + el límite de sobregiro: " + ((CuentaCorriente) cuentaParaRetirar).getLimiteSobregiro()
+                        + " usd");
+                System.out.println("------------------------------------------------------------------");
+                } else if (cuentaParaRetirar instanceof CuentaDeAhorro && retiro > cuentaParaRetirar.getSaldo()) {
+                System.out.println("------------------------------------------------------------------");
+                System.out.println("Retiro cancelado - El retiro excede el saldo disponible: " + cuentaParaRetirar.getSaldo()
+                        + " usd");
+                System.out.println("------------------------------------------------------------------");
+            } else {
+                    cuentaParaRetirar.setSaldo(cuentaParaRetirar.getSaldo()-retiro);
                     System.out.println("---------------------------------------------");
                     System.out.println("### Saldo retirado con éxito ### ");
                     System.out.println("---------------------------------------------");
-                    break;
                 }
-            } else {
-                System.out.println("---------------------------------------------");
-                System.out.println("### No existe cuenta elegida ###");
-                System.out.println("---------------------------------------------");
-            }
+        } else {
+            System.out.println("---------------------------------------------");
+            System.out.println("### No existe cuenta elegida ###");
+            System.out.println("---------------------------------------------");
         }
     }
 }
