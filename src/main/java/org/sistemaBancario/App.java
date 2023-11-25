@@ -20,13 +20,15 @@ public class App
         //hardcode de clientes
         Cliente cliente1 = new Cliente(1,"Leo Messi","calle 123");
         bancoPrintLine.agregarCliente(cliente1);
-        CuentaCorriente cuentaCliente1 = new CuentaCorriente(1,cliente1,"Cuenta corriente",10000,300.0);
+        CuentaCorriente cuentaCliente1 = new CuentaCorriente(1,cliente1,"Cuenta corriente",2000,300.0);
         cliente1.agregarCuenta(cuentaCliente1);
+        CuentaDeAhorro cuentaCliente2 = new CuentaDeAhorro(2,cliente1,"Cuenta de ahorro",8000,2.0);
+        cliente1.agregarCuenta(cuentaCliente2);
 
         Cliente cliente2 = new Cliente(2,"Fernando Clemens","Calle 321");
-        CuentaDeAhorro CuentaCliente2 = new CuentaDeAhorro(1,cliente2,"Cuenta de ahorro",2000, 5.0);
+        CuentaDeAhorro CuentaCliente3 = new CuentaDeAhorro(1,cliente2,"Cuenta de ahorro",2000, 5.0);
         bancoPrintLine.agregarCliente(cliente2);
-        cliente2.agregarCuenta(CuentaCliente2);
+        cliente2.agregarCuenta(CuentaCliente3);
 
         int seleccion;
         do {
@@ -50,59 +52,57 @@ public class App
             seleccion = scan.nextInt();
             switch (seleccion){
                 case 1:
-                    //Abrir nueva cuenta bancaria - OK
+                    //Agregar cliente nuevo - test manual OK
                     bancoServicio.abrirCuenta(bancoPrintLine);
                     break;
                 case 2:
-                    //AgregarCuenta - OK
+                    //Agregar cuenta a cliente existente - test manual OK
                     clienteServicio.agregarCuenta(bancoPrintLine);
                     break;
                 case 3:
-                    //Listar clientes del banco - OK
+                    //Listar clientes del banco - test manual OK
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     break;
                 case 4:
-                    //Ver saldo de cuentas de un cliente - OK
+                    //Ver saldo de cuentas de un cliente - test manual OK
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     Cliente clienteParaVerSaldo = bancoServicio.seleccionarCliente(bancoPrintLine);
                     cuentaServicio.verSaldo(clienteParaVerSaldo);
                     break;
                 case 5:
-                    //Eliminar cliente - OK
+                    //Eliminar cliente - test manual OK
                     bancoServicio.eliminarCuenta(bancoPrintLine);
                     break;
                 case 6:
-                    //Eliminar cuenta de cliente - OK
+                    //Eliminar cuenta de cliente - test manual OK
                     clienteServicio.eliminarCuenta(bancoPrintLine);
                     break;
                 case 7:
-                    //Depositar -OK
+                    //Depositar - test manual OK
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     Cliente clienteParaDepositar = bancoServicio.seleccionarCliente(bancoPrintLine);
                     cuentaServicio.depositar(clienteParaDepositar);
                     break;
                 case 8:
-                    //Retirar - OK
+                    //Retirar - test manual OK
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     Cliente clienteParaRetirar = bancoServicio.seleccionarCliente(bancoPrintLine);
                     cuentaServicio.retirar(clienteParaRetirar);
                     break;
                 case 9:
-                    //Exportar lista de clientes -OK
+                    //Exportar lista de clientes - MEJORAR
                     bancoServicio.exportarListaDeClientes(bancoPrintLine);
                     break;
                 case 10:
-                    //editar sobregiro de cuenta corriente - OK
+                    //editar sobregiro de cuenta corriente - test manual OK
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     Cliente clienteSeleccionadoSobregiro = bancoServicio.seleccionarCliente(bancoPrintLine);
                     cuentaServicio.verSaldo(clienteSeleccionadoSobregiro);
                     CuentaBancaria cuentaParaEditarSobregiro = clienteServicio.seleccionarCuenta(clienteSeleccionadoSobregiro);
-                    CuentaBancaria cuentaEditadaSobregiro =  cuentaCorrienteServicio.editarSobregiro(cuentaParaEditarSobregiro);
-                    clienteSeleccionadoSobregiro.eliminarCuenta(cuentaParaEditarSobregiro);
-                    clienteSeleccionadoSobregiro.agregarCuenta(cuentaEditadaSobregiro);
+                    cuentaCorrienteServicio.editarSobregiro(cuentaParaEditarSobregiro);
                     break;
                 case 11:
-                    //editar intereses - OK
+                    //editar intereses de cuenta de ahorro- test manual en progreso
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     Cliente clienteSeleccionadoIntereses = bancoServicio.seleccionarCliente(bancoPrintLine);
                     cuentaServicio.verSaldo(clienteSeleccionadoIntereses);
@@ -112,7 +112,14 @@ public class App
                     clienteSeleccionadoIntereses.agregarCuenta(cuentaEditadaIntereses);
                     break;
                 case 12:
-                    //generar intereses en cuenta de ahorro
+                    //generar intereses en cuenta de ahorro - test manual en progreso
+                    bancoServicio.obtenerClientes(bancoPrintLine);
+                    Cliente clienteSaldoConIntereses = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    cuentaServicio.verSaldo(clienteSaldoConIntereses);
+                    CuentaBancaria cuentaParaSumarIntereses = clienteServicio.seleccionarCuenta(clienteSaldoConIntereses);
+                    CuentaBancaria cuentaEditadaSaldo = cuentaDeAhorroServicio.SumarInteresesACuenta(cuentaParaSumarIntereses);
+                    clienteSaldoConIntereses.eliminarCuenta(cuentaParaSumarIntereses);
+                    clienteSaldoConIntereses.agregarCuenta(cuentaEditadaSaldo);
                     break;
                 default:
                     if(seleccion != 0){
@@ -125,13 +132,14 @@ public class App
         System.out.println("### GRACIAS POR USAR BANCO PRINT-LINE ###");
 
         //WIP:
-        //  (-)  Elaborar el README
-        //  (-)  que sea editable intereses y sobregiro
-        //  (-)  aplicar intereses
+        //  (x)  Elaborar el README
+        //  (x)  que sea editable intereses y sobregiro
+        //  (x)  aplicar intereses
         //  (x)  funcion exportar CSV
         //  (x)  aplicar interface
         //  (x)  BUG: IDs de cuentas no funciona.
         //  (x)  BUG: se dispara el else en varios if de selección.
         //  (x)  REFACTORIZAR.
+        //  (-)  Hacer editable el destino del exportable (CSV).
     }
 }
