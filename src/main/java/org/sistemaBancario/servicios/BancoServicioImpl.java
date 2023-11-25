@@ -78,13 +78,14 @@ public class BancoServicioImpl implements BancoServicios{
         for (Cliente cliente: banco.getClientes()) {
             if(cliente.getId() == id){
                 clienteAEliminar = cliente;
-                banco.getClientes().remove(clienteAEliminar);
-                System.out.println("---------------------------------------------");
-                System.out.println("### cliente eliminado con éxito ###");
-                System.out.println("---------------------------------------------");
             }
         }
-        if(clienteAEliminar == null) {
+        if(clienteAEliminar != null) {
+            banco.getClientes().remove(clienteAEliminar);
+            System.out.println("---------------------------------------------");
+            System.out.println("### cliente eliminado con éxito ###");
+            System.out.println("---------------------------------------------");
+        } else {
             System.out.println("---------------------------------------------");
             System.out.println("### cliente no existe ###");
             System.out.println("---------------------------------------------");

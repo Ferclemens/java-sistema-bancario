@@ -20,9 +20,9 @@ public class App
         //hardcode de clientes
         Cliente cliente1 = new Cliente(1,"Leo Messi","calle 123");
         bancoPrintLine.agregarCliente(cliente1);
-        CuentaCorriente cuentaCliente1 = new CuentaCorriente(1,cliente1,"Cuenta corriente",1000,300.0);
+        CuentaCorriente cuentaCliente1 = new CuentaCorriente(1,cliente1,"Cuenta corriente",2000,300.0);
         cliente1.agregarCuenta(cuentaCliente1);
-        CuentaDeAhorro cuentaCliente2 = new CuentaDeAhorro(2,cliente1,"Cuenta de ahorro",99999,2.0);
+        CuentaDeAhorro cuentaCliente2 = new CuentaDeAhorro(2,cliente1,"Cuenta de ahorro",8000,2.0);
         cliente1.agregarCuenta(cuentaCliente2);
 
         Cliente cliente2 = new Cliente(2,"Fernando Clemens","Calle 321");
@@ -52,29 +52,29 @@ public class App
             seleccion = scan.nextInt();
             switch (seleccion){
                 case 1:
-                    //Agregar cliente nuevo - OK
+                    //Agregar cliente nuevo - test manual OK
                     bancoServicio.abrirCuenta(bancoPrintLine);
                     break;
                 case 2:
-                    //Agregar cuenta a cliente existente - OK
+                    //Agregar cuenta a cliente existente - test manual OK
                     clienteServicio.agregarCuenta(bancoPrintLine);
                     break;
                 case 3:
-                    //Listar clientes del banco - OK
+                    //Listar clientes del banco - test manual OK
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     break;
                 case 4:
-                    //Ver saldo de cuentas de un cliente - OK
+                    //Ver saldo de cuentas de un cliente - test manual OK
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     Cliente clienteParaVerSaldo = bancoServicio.seleccionarCliente(bancoPrintLine);
                     cuentaServicio.verSaldo(clienteParaVerSaldo);
                     break;
                 case 5:
-                    //Eliminar cliente - OK
+                    //Eliminar cliente - test manual OK
                     bancoServicio.eliminarCuenta(bancoPrintLine);
                     break;
                 case 6:
-                    //Eliminar cuenta de cliente
+                    //Eliminar cuenta de cliente - test manual OK
                     clienteServicio.eliminarCuenta(bancoPrintLine);
                     break;
                 case 7:

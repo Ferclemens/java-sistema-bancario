@@ -14,20 +14,23 @@ public class CuentaBancariaServicioImpl implements CuentaBancariaServicio {
         System.out.println("### VER SALDOS DE CLIENTE ###" );
         if(cliente != null){
             double saldoTotal = 0.0;
-            System.out.println("---------------Saldos Cliente----------------" +
-                    "\nID: "+ cliente.getId() + "| nombre: " + cliente.getNombre() +
-                    "\nCuenta/s: ");
+            System.out.println("----------- Saldo/s de cuenta/s de " + cliente.getNombre() + " -----------" +
+                    "\nCUENTA/S: ");
+            System.out.println("---------------------------------------------");
             for (CuentaBancaria cuenta: cliente.getCuentasBancarias()) {
                 saldoTotal += cuenta.getSaldo();
                 System.out.println("ID: " + cuenta.getCuentaID() + " | tipo: " + cuenta.getTipo() +
-                        " | saldo: " + cuenta.getSaldo());
+                        " | saldo usd: " + cuenta.getSaldo());
                 if (cuenta instanceof CuentaCorriente) {
                     System.out.println("Límite sobregiro : " + ((CuentaCorriente) cuenta).getLimiteSobregiro());
+                    System.out.println("---------------------------------------------");
                 } else if (cuenta instanceof CuentaDeAhorro) {
                     System.out.println("intereses: " + ((CuentaDeAhorro) cuenta).getIntereses());
+                    System.out.println("---------------------------------------------");
                 }
             }
-            System.out.println("SALDO TOTAL: " + saldoTotal);
+            System.out.println("SALDO TOTAL USD: " + saldoTotal);
+            System.out.println("---------------------------------------------");
         } else {
             System.out.println("---------------------------------------------");
             System.out.println("### cliente no encontrado ###");
