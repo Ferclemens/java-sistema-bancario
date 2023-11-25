@@ -30,10 +30,16 @@ public class BancoServicioImpl implements BancoServicios{
         if( eleccion == 2){
             String tipo = "Cuenta Corriente";
             CuentaCorriente cuenta = new CuentaCorriente(cliente.proximaCuentaId(), cliente, tipo, saldo, 100.0);
+            System.out.println("Ingrese el límite de sobregiro en usd: ");
+            double sobregiro = datos.nextDouble();
+            cuenta.setLimiteSobregiro(sobregiro);
             cliente.getCuentasBancarias().add(cuenta);
         } else if ( eleccion == 1){
             String tipo = "Cuenta de ahorro";
             CuentaDeAhorro cuenta = new CuentaDeAhorro(cliente.proximaCuentaId(), cliente, tipo, saldo,5.0);
+            System.out.println("Ingrese la tasa de intereses (%): ");
+            double intereses = datos.nextDouble();
+            cuenta.setIntereses(intereses);
             cliente.getCuentasBancarias().add(cuenta);
         } else {
             System.out.println("Error. Seleccione una de las 2 opciones de cuenta: ");

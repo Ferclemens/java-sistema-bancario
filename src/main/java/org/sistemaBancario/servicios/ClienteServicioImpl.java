@@ -35,7 +35,7 @@ public class ClienteServicioImpl implements ClienteServicio{
                 } else if (eleccion == 1) {
                     String tipo = "Cuenta de ahorro";
                     CuentaDeAhorro cuenta = new CuentaDeAhorro(cliente.proximaCuentaId(), clienteSeleccionado, tipo, saldo, 0.0);
-                    System.out.println("Ingrese el porcentaje de intereses: ");
+                    System.out.println("Ingrese la tasa de intereses (%): ");
                     double intereses = datos.nextDouble();
                     cuenta.setIntereses(intereses);
                     clienteSeleccionado.getCuentasBancarias().add(cuenta);
