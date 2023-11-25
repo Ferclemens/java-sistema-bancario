@@ -20,13 +20,15 @@ public class App
         //hardcode de clientes
         Cliente cliente1 = new Cliente(1,"Leo Messi","calle 123");
         bancoPrintLine.agregarCliente(cliente1);
-        CuentaCorriente cuentaCliente1 = new CuentaCorriente(1,cliente1,"Cuenta corriente",10000,300.0);
+        CuentaCorriente cuentaCliente1 = new CuentaCorriente(1,cliente1,"Cuenta corriente",1000,300.0);
         cliente1.agregarCuenta(cuentaCliente1);
+        CuentaDeAhorro cuentaCliente2 = new CuentaDeAhorro(2,cliente1,"Cuenta de ahorro",99999,2.0);
+        cliente1.agregarCuenta(cuentaCliente2);
 
         Cliente cliente2 = new Cliente(2,"Fernando Clemens","Calle 321");
-        CuentaDeAhorro CuentaCliente2 = new CuentaDeAhorro(1,cliente2,"Cuenta de ahorro",2000, 5.0);
+        CuentaDeAhorro CuentaCliente3 = new CuentaDeAhorro(1,cliente2,"Cuenta de ahorro",2000, 5.0);
         bancoPrintLine.agregarCliente(cliente2);
-        cliente2.agregarCuenta(CuentaCliente2);
+        cliente2.agregarCuenta(CuentaCliente3);
 
         int seleccion;
         do {
@@ -50,11 +52,11 @@ public class App
             seleccion = scan.nextInt();
             switch (seleccion){
                 case 1:
-                    //Abrir nueva cuenta bancaria - OK
+                    //Agregar cliente nuevo - OK
                     bancoServicio.abrirCuenta(bancoPrintLine);
                     break;
                 case 2:
-                    //AgregarCuenta - OK
+                    //Agregar cuenta a cliente existente - OK
                     clienteServicio.agregarCuenta(bancoPrintLine);
                     break;
                 case 3:
@@ -112,7 +114,7 @@ public class App
                     clienteSeleccionadoIntereses.agregarCuenta(cuentaEditadaIntereses);
                     break;
                 case 12:
-                    //generar intereses en cuenta de ahorro
+                    //generar intereses en cuenta de ahorro - OK
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     Cliente clienteSaldoConIntereses = bancoServicio.seleccionarCliente(bancoPrintLine);
                     cuentaServicio.verSaldo(clienteSaldoConIntereses);
@@ -132,7 +134,7 @@ public class App
         System.out.println("### GRACIAS POR USAR BANCO PRINT-LINE ###");
 
         //WIP:
-        //  (-)  Elaborar el README
+        //  (x)  Elaborar el README
         //  (x)  que sea editable intereses y sobregiro
         //  (x)  aplicar intereses
         //  (x)  funcion exportar CSV

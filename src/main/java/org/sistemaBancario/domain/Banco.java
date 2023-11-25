@@ -26,6 +26,7 @@ public class Banco {
     public void listarClientes(){
         System.out.println("### LISTA DE CLIENTES ###" );
         if (clientes.isEmpty()){
+            System.out.println("---------------------------------------------");
             System.out.println("### No existen clientes ###");
             System.out.println("---------------------------------------------");
         } else {

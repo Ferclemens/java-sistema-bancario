@@ -19,8 +19,9 @@ public class CuentaDeAhorroServicioImpl implements CuentaDeAhorroServicio {
         System.out.println("ingrese el nuevo porcentaje de intereses: ");
         double intereses = datos.nextDouble();
         cuentaEditada.setIntereses(intereses);
+        System.out.println("--------------------------------------------------");
         System.out.println("### porcentaje de intereses cambiado con éxito ###");
-        System.out.println("---------------------------------------------");
+        System.out.println("--------------------------------------------------");
         return cuentaEditada;
     }
     @Override
@@ -31,9 +32,14 @@ public class CuentaDeAhorroServicioImpl implements CuentaDeAhorroServicio {
         //en una variable para su posterior uso.
         double interesesDeCuenta = 0;
         try {
+            //obtenemos el campo "intereses" en cuenta
             Field campo = cuenta.getClass().getDeclaredField("intereses");
+            //lo hacemos accesible (campo tipo private)
             campo.setAccessible(true);
+            //guardamos ese campo (tipo oBject) en una variable
             Object valor = campo.get(cuenta);
+            //preguntamos si ese campo es instancia de Double, si es correcto
+            //lo guardamos en la variable interesesDeCuenta para usarlo.
             if(valor instanceof Double){
                 interesesDeCuenta = (Double) valor;
             }
@@ -48,6 +54,7 @@ public class CuentaDeAhorroServicioImpl implements CuentaDeAhorroServicio {
         double saldoConIntereses = cuenta.getSaldo() * (1 + interesesDeCuenta /100);
         cuentaEditada.setSaldo(saldoConIntereses);
         cuentaEditada.setTitular(cuenta.getTitular());
+        System.out.println("---------------------------------------------");
         System.out.println("### Intereses sumados al saldo con éxito ###");
         System.out.println("---------------------------------------------");
         return cuentaEditada;

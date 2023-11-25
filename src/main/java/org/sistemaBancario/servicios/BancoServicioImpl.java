@@ -17,9 +17,8 @@ public class BancoServicioImpl implements BancoServicios{
         String nombre = datos.nextLine();
         System.out.println("Ingrese dirección:");
         String direccion = datos.nextLine();
-        //int proximoID = clientes.
         Cliente cliente = new Cliente(proximoClienteId(banco), nombre, direccion);
-        System.out.println("Ingrese saldo:");
+        System.out.println("Ingrese saldo en usd:");
         double saldo = datos.nextDouble();
         System.out.println("Seleccione tipo de cuenta:\n1- Cuenta de ahorro\n2- Cuenta Corriente");
         int eleccion = datos.nextInt();
@@ -37,10 +36,10 @@ public class BancoServicioImpl implements BancoServicios{
             CuentaDeAhorro cuenta = new CuentaDeAhorro(cliente.proximaCuentaId(), cliente, tipo, saldo,5.0);
             cliente.getCuentasBancarias().add(cuenta);
         } else {
-            System.out.println("Error. Seleccione una de las 2 opciones de cuenta.");
-            System.out.println("--------------------------------------------------");
+            System.out.println("Error. Seleccione una de las 2 opciones de cuenta: ");
         }
         banco.getClientes().add(cliente);
+        System.out.println("---------------------------------------------");
         System.out.println("### Cliente nuevo creado con éxito ###");
         System.out.println("---------------------------------------------");
         //no tengo que cerrar el Scanner porque sino da error "NoSuchElementException"
@@ -48,12 +47,12 @@ public class BancoServicioImpl implements BancoServicios{
     }
     public int proximoClienteId(Banco banco) {
         int id = banco.getClientes().toArray().length + 1;
-        //System.out.println("Proximo ID " + id);
         return id;
     }
     public void obtenerClientes(Banco banco){
         System.out.println("### LISTA DE CLIENTES ###" );
         if (banco.getClientes().isEmpty()){
+            System.out.println("---------------------------------------------");
             System.out.println("### No existen clientes ###");
             System.out.println("---------------------------------------------");
         } else {
@@ -71,16 +70,19 @@ public class BancoServicioImpl implements BancoServicios{
         int id = datos.nextInt();
         Cliente clienteAEliminar = null;
         for (Cliente cliente: banco.getClientes()) {
-            if(cliente.getId() != id){
-                System.out.println("### cliente no encontrado ###");
-                System.out.println("---------------------------------------------");
-            } else {
+            if(cliente.getId() == id){
                 clienteAEliminar = cliente;
+                banco.getClientes().remove(clienteAEliminar);
+                System.out.println("---------------------------------------------");
+                System.out.println("### cliente eliminado con éxito ###");
+                System.out.println("---------------------------------------------");
             }
         }
-        banco.getClientes().remove(clienteAEliminar);
-        System.out.println("### cliente eliminado con éxito ###");
-        System.out.println("---------------------------------------------");
+        if(clienteAEliminar == null) {
+            System.out.println("---------------------------------------------");
+            System.out.println("### cliente no existe ###");
+            System.out.println("---------------------------------------------");
+        }
     }
     @Override
     public void exportarListaDeClientes(Banco banco) {
@@ -103,6 +105,7 @@ public class BancoServicioImpl implements BancoServicios{
                     destino.writeNext(datos.toArray(new String[0]));
                 }
             }
+            System.out.println("---------------------------------------------");
             System.out.println("### Datos descargados con éxito ###");
             System.out.println("---------------------------------------------");
         } catch(IOException e) {
@@ -113,18 +116,21 @@ public class BancoServicioImpl implements BancoServicios{
     @Override
     public Cliente seleccionarCliente(Banco banco) {
         Cliente clienteSeleccionado = null;
-        while (clienteSeleccionado == null){
+        do {
             Scanner datos = new Scanner(System.in);
             System.out.println("seleccione el ID del cliente: ");
             int id = datos.nextInt();
             for (Cliente cliente: banco.getClientes()) {
                 if(cliente.getId() == id){
                     clienteSeleccionado = cliente;
-                } else {
-                    System.out.println("no existe cliente con ese ID, seleccione de nuevo.");
-                    }
+                    break;
+                }
             }
-        }
+            if (clienteSeleccionado == null) {
+                System.out.println("no existe cliente con ese ID, seleccione de nuevo.");
+            }
+        } while (clienteSeleccionado == null);
+
         return clienteSeleccionado;
     }
 }
