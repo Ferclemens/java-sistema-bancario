@@ -78,7 +78,7 @@ public class App
                     clienteServicio.eliminarCuenta(bancoPrintLine);
                     break;
                 case 7:
-                    //Depositar -OK
+                    //Depositar - test manual OK
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     Cliente clienteParaDepositar = bancoServicio.seleccionarCliente(bancoPrintLine);
                     cuentaServicio.depositar(clienteParaDepositar);

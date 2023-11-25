@@ -44,23 +44,24 @@ public class CuentaBancariaServicioImpl implements CuentaBancariaServicio {
         verSaldo(cliente);
         System.out.println("seleccione el ID de la cuenta para el deposito: ");
         int idCuenta = datos.nextInt();
+        CuentaBancaria cuentaParaDepositar = null;
         for (CuentaBancaria cuenta: cliente.getCuentasBancarias()) {
-            if(idCuenta != cuenta.getCuentaID()){
-                //BUG: salta el print por mas que no se cumple la condiciooooon!! t.t
-                System.out.println("---------------------------------------------");
-                System.out.println("### No existe cuenta elegida ###");
-                System.out.println("---------------------------------------------");
-            } else {
-                System.out.println("ingrese el monto a depositar: ");
-                double deposito = datos.nextDouble();
-                cuenta.setSaldo(cuenta.getSaldo() + deposito);
-                System.out.println("---------------------------------------------");
-                System.out.println("### Saldo cargado con éxito ### ");
-                System.out.println("---------------------------------------------");
-
+            if(idCuenta == cuenta.getCuentaID()) {
+                cuentaParaDepositar = cuenta;
             }
         }
-
+        if(cuentaParaDepositar != null){
+            System.out.println("ingrese el monto (usd) a depositar: ");
+            double deposito = datos.nextDouble();
+            cuentaParaDepositar.setSaldo(cuentaParaDepositar.getSaldo() + deposito);
+            System.out.println("---------------------------------------------");
+            System.out.println("### Saldo cargado con éxito ### ");
+            System.out.println("---------------------------------------------");
+        } else {
+            System.out.println("---------------------------------------------");
+            System.out.println("### No existe cuenta elegida ###");
+            System.out.println("---------------------------------------------");
+        }
     }
     @Override
     public void retirar(Cliente cliente){
