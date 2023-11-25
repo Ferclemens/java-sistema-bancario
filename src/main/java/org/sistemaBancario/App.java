@@ -90,21 +90,19 @@ public class App
                     cuentaServicio.retirar(clienteParaRetirar);
                     break;
                 case 9:
-                    //Exportar lista de clientes -OK
+                    //Exportar lista de clientes - MEJORAR
                     bancoServicio.exportarListaDeClientes(bancoPrintLine);
                     break;
                 case 10:
-                    //editar sobregiro de cuenta corriente - OK
+                    //editar sobregiro de cuenta corriente - test manual OK
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     Cliente clienteSeleccionadoSobregiro = bancoServicio.seleccionarCliente(bancoPrintLine);
                     cuentaServicio.verSaldo(clienteSeleccionadoSobregiro);
                     CuentaBancaria cuentaParaEditarSobregiro = clienteServicio.seleccionarCuenta(clienteSeleccionadoSobregiro);
-                    CuentaBancaria cuentaEditadaSobregiro =  cuentaCorrienteServicio.editarSobregiro(cuentaParaEditarSobregiro);
-                    clienteSeleccionadoSobregiro.eliminarCuenta(cuentaParaEditarSobregiro);
-                    clienteSeleccionadoSobregiro.agregarCuenta(cuentaEditadaSobregiro);
+                    cuentaCorrienteServicio.editarSobregiro(cuentaParaEditarSobregiro);
                     break;
                 case 11:
-                    //editar intereses de cuenta de ahorro- OK
+                    //editar intereses de cuenta de ahorro- test manual en progreso
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     Cliente clienteSeleccionadoIntereses = bancoServicio.seleccionarCliente(bancoPrintLine);
                     cuentaServicio.verSaldo(clienteSeleccionadoIntereses);
@@ -114,7 +112,7 @@ public class App
                     clienteSeleccionadoIntereses.agregarCuenta(cuentaEditadaIntereses);
                     break;
                 case 12:
-                    //generar intereses en cuenta de ahorro - OK
+                    //generar intereses en cuenta de ahorro - test manual en progreso
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     Cliente clienteSaldoConIntereses = bancoServicio.seleccionarCliente(bancoPrintLine);
                     cuentaServicio.verSaldo(clienteSaldoConIntereses);
@@ -140,7 +138,8 @@ public class App
         //  (x)  funcion exportar CSV
         //  (x)  aplicar interface
         //  (x)  BUG: IDs de cuentas no funciona.
-        //  (-)  BUG: se dispara el else en varios if de selección.
+        //  (x)  BUG: se dispara el else en varios if de selección.
         //  (x)  REFACTORIZAR.
+        //  (-)  Hacer editable el destino del exportable (CSV).
     }
 }

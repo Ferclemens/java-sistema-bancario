@@ -107,10 +107,10 @@ public class ClienteServicioImpl implements ClienteServicio{
             for (CuentaBancaria cuenta: cliente.getCuentasBancarias()) {
                 if(cuenta.getCuentaID() == id){
                     cuentaSeleccionada = cuenta;
-                    break;
-                } else {
-                    System.out.println("no existe cuenta con ese ID, seleccione de nuevo.");
                 }
+            }
+            if (cuentaSeleccionada == null) {
+                System.out.println("no existe cuenta con ese ID, seleccione de nuevo.");
             }
         }
         return cuentaSeleccionada;

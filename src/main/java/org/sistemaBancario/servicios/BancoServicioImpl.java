@@ -93,7 +93,8 @@ public class BancoServicioImpl implements BancoServicios{
     }
     @Override
     public void exportarListaDeClientes(Banco banco) {
-        try(CSVWriter destino = new CSVWriter(new FileWriter("C:\\Users\\Fer\\Desktop\\ClientesBanco.csv"))){
+        //Cambiar ruta para descargar en otro lado
+        try(CSVWriter destino = new CSVWriter(new FileWriter("C:\\Users\\Fer\\Desktop\\ClientesBancoPrintline.csv"))){
             //encabezados
             String[] encabezado = {"ID", "Nombre", "direccion","CuentaID", "Tipo", "saldo"};
             destino.writeNext(encabezado);
