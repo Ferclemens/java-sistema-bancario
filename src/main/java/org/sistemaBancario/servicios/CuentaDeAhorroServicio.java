@@ -6,5 +6,5 @@ import org.sistemaBancario.domain.CuentaDeAhorro;
 public interface CuentaDeAhorroServicio {
     void editarIntereses(CuentaBancaria cuenta);
 
-    CuentaDeAhorro SumarInteresesACuenta(CuentaBancaria cuenta);
+    void SumarInteresesACuenta(CuentaBancaria cuenta);
 }

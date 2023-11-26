@@ -115,9 +115,7 @@ public class App
                     Cliente clienteSaldoConIntereses = bancoServicio.seleccionarCliente(bancoPrintLine);
                     cuentaServicio.verSaldo(clienteSaldoConIntereses);
                     CuentaBancaria cuentaParaSumarIntereses = clienteServicio.seleccionarCuenta(clienteSaldoConIntereses);
-                    CuentaBancaria cuentaEditadaSaldo = cuentaDeAhorroServicio.SumarInteresesACuenta(cuentaParaSumarIntereses);
-                    clienteSaldoConIntereses.eliminarCuenta(cuentaParaSumarIntereses);
-                    clienteSaldoConIntereses.agregarCuenta(cuentaEditadaSaldo);
+                    cuentaDeAhorroServicio.SumarInteresesACuenta(cuentaParaSumarIntereses);
                     break;
                 default:
                     if(seleccion != 0){
