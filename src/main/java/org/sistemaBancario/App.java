@@ -102,14 +102,12 @@ public class App
                     cuentaCorrienteServicio.editarSobregiro(cuentaParaEditarSobregiro);
                     break;
                 case 11:
-                    //editar intereses de cuenta de ahorro- test manual en progreso
+                    //editar intereses de cuenta de ahorro- test manual OK
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     Cliente clienteSeleccionadoIntereses = bancoServicio.seleccionarCliente(bancoPrintLine);
                     cuentaServicio.verSaldo(clienteSeleccionadoIntereses);
                     CuentaBancaria cuentaParaEditarIntereses = clienteServicio.seleccionarCuenta(clienteSeleccionadoIntereses);
-                    CuentaBancaria cuentaEditadaIntereses = cuentaDeAhorroServicio.editarIntereses(cuentaParaEditarIntereses);
-                    clienteSeleccionadoIntereses.eliminarCuenta(cuentaParaEditarIntereses);
-                    clienteSeleccionadoIntereses.agregarCuenta(cuentaEditadaIntereses);
+                    cuentaDeAhorroServicio.editarIntereses(cuentaParaEditarIntereses);
                     break;
                 case 12:
                     //generar intereses en cuenta de ahorro - test manual en progreso

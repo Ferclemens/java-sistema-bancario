@@ -9,20 +9,21 @@ import java.util.Scanner;
 
 public class CuentaDeAhorroServicioImpl implements CuentaDeAhorroServicio {
     @Override
-    public CuentaDeAhorro editarIntereses(CuentaBancaria cuenta){
-        CuentaDeAhorro cuentaEditada = new CuentaDeAhorro();
-        cuentaEditada.setCuentaID(cuenta.getCuentaID());
-        cuentaEditada.setTipo(cuenta.getTipo());
-        cuentaEditada.setSaldo(cuenta.getSaldo());
-        cuentaEditada.setTitular(cuenta.getTitular());
-        Scanner datos = new Scanner(System.in);
-        System.out.println("ingrese el nuevo porcentaje de intereses: ");
-        double intereses = datos.nextDouble();
-        cuentaEditada.setIntereses(intereses);
-        System.out.println("--------------------------------------------------");
-        System.out.println("### porcentaje de intereses cambiado con éxito ###");
-        System.out.println("--------------------------------------------------");
-        return cuentaEditada;
+    public void editarIntereses(CuentaBancaria cuenta){
+        if(cuenta instanceof CuentaDeAhorro) {
+            System.out.println("TASA INTERESES ACTUAL: " + ((CuentaDeAhorro)cuenta).getIntereses());
+            Scanner datos = new Scanner(System.in);
+            System.out.println("ingrese la nueva tasa de intereses (%): ");
+            double tasaIntereses = datos.nextDouble();
+            ((CuentaDeAhorro)cuenta).setIntereses(tasaIntereses);
+            System.out.println("---------------------------------------------");
+            System.out.println("### Tasa de intereses cambiada con éxito ###");
+            System.out.println("---------------------------------------------");
+        } else {
+            System.out.println("-------------------------------------------------------------");
+            System.out.println("### cancelado - la cuenta no es del tipo Cuenta de Ahorro ###");
+            System.out.println("-------------------------------------------------------------");
+        }
     }
     @Override
     public CuentaDeAhorro SumarInteresesACuenta(CuentaBancaria cuenta){

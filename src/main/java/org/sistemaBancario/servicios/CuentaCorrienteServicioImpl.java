@@ -23,6 +23,5 @@ public class CuentaCorrienteServicioImpl implements CuentaCorrienteServicio{
             System.out.println("### cancelado - la cuenta no es del tipo Cuenta Corriente ###");
             System.out.println("-------------------------------------------------------------");
         }
-
     }
 }
