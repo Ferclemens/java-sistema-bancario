@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class App
 {
     public static void main( String[] args ) {
-        System.out.println("### BIENVENIDOS AL BANCO PRINT-LINE ###");
+        System.out.println("####### BIENVENIDOS AL BANCO PRINT-LINE ########");
         //inicializamos el banco y los servicios
         Banco bancoPrintLine = new Banco();
         BancoServicioImpl bancoServicio = new BancoServicioImpl();
@@ -32,20 +32,22 @@ public class App
 
         int seleccion;
         do {
-            System.out.println("### MENU PRINCIPAL ###");
-            System.out.println("1. Agregar cliente");
-            System.out.println("2. Agregar cuenta a cliente existente");
-            System.out.println("3. Listar clientes");
-            System.out.println("4. Ver saldo/s de cuenta/s");
-            System.out.println("5. Eliminar cliente");
-            System.out.println("6. Eliminar cuenta de cliente");
-            System.out.println("7. Depositar dinero");
-            System.out.println("8. Retirar dinero");
-            System.out.println("9. Obtener lista de clientes");
-            System.out.println("10. Editar sobregiro");
-            System.out.println("11. Editar intereses");
-            System.out.println("12. generar intereses");
-            System.out.println("0. Salir");
+            System.out.println("################ MENU PRINCIPAL ################");
+            System.out.println("################################################");
+            System.out.println("# 1. Agregar cliente                           #");
+            System.out.println("# 2. Agregar cuenta a cliente existente        #");
+            System.out.println("# 3. Listar clientes                           #");
+            System.out.println("# 4. Ver saldo/s de cuenta/s                   #");
+            System.out.println("# 5. Eliminar cliente                          #");
+            System.out.println("# 6. Eliminar cuenta de cliente                #");
+            System.out.println("# 7. Depositar dinero                          #");
+            System.out.println("# 8. Retirar dinero                            #");
+            System.out.println("# 9. Obtener lista de clientes                 #");
+            System.out.println("# 10. Editar sobregiro                         #");
+            System.out.println("# 11. Editar intereses                         #");
+            System.out.println("# 12. generar intereses                        #");
+            System.out.println("# 0. Salir                                     #");
+            System.out.println("################################################");
 
             System.out.println("Ingrese una opción del menú: ");
             Scanner scan = new Scanner(System.in);
@@ -110,7 +112,7 @@ public class App
                     cuentaDeAhorroServicio.editarIntereses(cuentaParaEditarIntereses);
                     break;
                 case 12:
-                    //generar intereses en cuenta de ahorro - test manual en progreso
+                    //generar intereses en cuenta de ahorro - test manual OK
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     Cliente clienteSaldoConIntereses = bancoServicio.seleccionarCliente(bancoPrintLine);
                     cuentaServicio.verSaldo(clienteSaldoConIntereses);
@@ -125,17 +127,17 @@ public class App
                     }
             }
         } while (seleccion != 0);
-        System.out.println("### GRACIAS POR USAR BANCO PRINT-LINE ###");
+        System.out.println("###### GRACIAS POR USAR BANCO PRINT-LINE #######");
 
         //WIP:
         //  (x)  Elaborar el README
         //  (x)  que sea editable intereses y sobregiro
         //  (x)  aplicar intereses
         //  (x)  funcion exportar CSV
-        //  (x)  aplicar interface
-        //  (x)  BUG: IDs de cuentas no funciona.
+        //  (x)  aplicar interfaces
+        //  (-)  BUG: IDs de cuentas no funciona.
         //  (x)  BUG: se dispara el else en varios if de selección.
         //  (x)  REFACTORIZAR.
-        //  (-)  Hacer editable el destino del exportable (CSV).
+        //  (x)  Hacer editable el destino del exportable (CSV).
     }
 }
