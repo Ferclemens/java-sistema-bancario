@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class BancoServicioImpl implements BancoServicios{
+public class BancoServicioImpl implements BancoServicio {
     @Override
-    public void abrirCuenta(Banco banco){
+    public void agregarCliente(Banco banco){
         Scanner datos = new Scanner(System.in);
         System.out.println("### CREAR CUENTA BANCARIA ###");
         System.out.println("Ingrese nombre:");
@@ -68,7 +68,7 @@ public class BancoServicioImpl implements BancoServicios{
         }
     }
     @Override
-    public void eliminarCuenta(Banco banco) {
+    public void eliminarCliente(Banco banco) {
         System.out.println("### ELIMINAR CLIENTE ###" );
         Scanner datos = new Scanner(System.in);
         banco.listarClientes();
