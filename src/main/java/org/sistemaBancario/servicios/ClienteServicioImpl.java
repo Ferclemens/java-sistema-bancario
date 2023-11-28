@@ -5,6 +5,22 @@ import org.sistemaBancario.domain.*;
 import java.util.Scanner;
 
 public class ClienteServicioImpl implements ClienteServicio{
+    //variable global para setear id's de CuentasBancarias de cliente
+    public int ultimoIdCuenta = 0;
+    public int proximaCuentaId(Cliente cliente) {
+        System.out.println("ultimoId Cuenta = " + ultimoIdCuenta);
+        int id = 0;
+        int longitudArray = cliente.getCuentasBancarias().toArray().length;
+        if(longitudArray > ultimoIdCuenta){
+            ultimoIdCuenta = longitudArray + 1;
+            id = ultimoIdCuenta;
+        } else {
+            ultimoIdCuenta = ultimoIdCuenta + 1;
+            id = ultimoIdCuenta;
+            System.out.println("NUEVO ultimoId Cuenta = " + ultimoIdCuenta);
+        }
+        return id;
+    }
     @Override
     public void agregarCuenta(Banco banco) {
         System.out.println("### AGREGAR CUENTA BANCARIA A CLIENTE EXISTENTE ###" );
@@ -35,14 +51,14 @@ public class ClienteServicioImpl implements ClienteServicio{
             }
             if (eleccion == 2) {
                 String tipo = "Cuenta Corriente";
-                CuentaCorriente cuenta = new CuentaCorriente(clienteSeleccionado.proximaCuentaId(), clienteSeleccionado, tipo, saldo, 0.0);
+                CuentaCorriente cuenta = new CuentaCorriente(proximaCuentaId(clienteSeleccionado), clienteSeleccionado, tipo, saldo, 0.0);
                 System.out.println("Ingrese el límite de sobregiro en usd: ");
                 double sobregiro = datos.nextDouble();
                 cuenta.setLimiteSobregiro(sobregiro);
                 clienteSeleccionado.getCuentasBancarias().add(cuenta);
             } else if (eleccion == 1) {
                 String tipo = "Cuenta de ahorro";
-                CuentaDeAhorro cuenta = new CuentaDeAhorro(clienteSeleccionado.proximaCuentaId(), clienteSeleccionado, tipo, saldo, 0.0);
+                CuentaDeAhorro cuenta = new CuentaDeAhorro(proximaCuentaId(clienteSeleccionado), clienteSeleccionado, tipo, saldo, 0.0);
                 System.out.println("Ingrese la tasa de intereses (%): ");
                 double intereses = datos.nextDouble();
                 cuenta.setIntereses(intereses);

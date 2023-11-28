@@ -14,7 +14,7 @@ public class App
         //  (x)  aplicar intereses
         //  (x)  funcion exportar CSV
         //  (x)  aplicar interfaces
-        //  (-)  BUG: IDs de cuentas se pisa al eliminar un cliente.
+        //  (x)  BUG: IDs de cuentas se pisa al eliminar un cliente.
         //  (x)  BUG: se dispara el else en varios if de selección.
         //  (x)  REFACTORIZAR.
         //  (x)  Hacer editable el destino del exportable (CSV).

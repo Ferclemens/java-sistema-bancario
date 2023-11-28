@@ -53,7 +53,7 @@ public class MenuServicioImpl {
             switch (seleccion){
                 case 1:
                     //Agregar cliente nuevo - test manual OK
-                    bancoServicio.agregarCliente(bancoPrintLine);
+                    bancoServicio.agregarCliente(bancoPrintLine, clienteServicio);
                     break;
                 case 2:
                     //Agregar cuenta a cliente existente - test manual OK

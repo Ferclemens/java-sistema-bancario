@@ -5,7 +5,7 @@ import org.sistemaBancario.domain.Cliente;
 
 public interface BancoServicio {
 
-    void agregarCliente(Banco banco);
+    void agregarCliente(Banco banco, ClienteServicioImpl clienteServicio);
 
     void eliminarCliente(Banco banco);
 
