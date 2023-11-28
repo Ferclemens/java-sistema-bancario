@@ -3,11 +3,11 @@ package org.sistemaBancario.servicios;
 import org.sistemaBancario.domain.Banco;
 import org.sistemaBancario.domain.Cliente;
 
-public interface BancoServicios {
+public interface BancoServicio {
 
-    void abrirCuenta(Banco banco);
+    void agregarCliente(Banco banco, ClienteServicioImpl clienteServicio);
 
-    void eliminarCuenta(Banco banco);
+    void eliminarCliente(Banco banco);
 
     void exportarListaDeClientes(Banco banco);
 

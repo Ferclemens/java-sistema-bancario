@@ -8,9 +8,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class BancoServicioImpl implements BancoServicios{
+public class BancoServicioImpl implements BancoServicio {
+    //variable global para setear id's de cuentas Cliente
+    public int ultimoIdCliente = 0;
+    public int proximoClienteId(Banco banco) {
+        System.out.println("ultimoId Cliente = " + ultimoIdCliente);
+        int id = 0;
+        int longitudArray = banco.getClientes().toArray().length;
+        if(longitudArray > ultimoIdCliente){
+            ultimoIdCliente = longitudArray + 1;
+            id = ultimoIdCliente;
+        } else {
+            ultimoIdCliente = ultimoIdCliente + 1;
+            id = ultimoIdCliente;
+            System.out.println("NUEVO ultimoId Cliente = " + ultimoIdCliente);
+        }
+        return id;
+    }
+
     @Override
-    public void abrirCuenta(Banco banco){
+    public void agregarCliente(Banco banco, ClienteServicioImpl clienteServicio){
         Scanner datos = new Scanner(System.in);
         System.out.println("### CREAR CUENTA BANCARIA ###");
         System.out.println("Ingrese nombre:");
@@ -29,14 +46,14 @@ public class BancoServicioImpl implements BancoServicios{
         }
         if( eleccion == 2){
             String tipo = "Cuenta Corriente";
-            CuentaCorriente cuenta = new CuentaCorriente(cliente.proximaCuentaId(), cliente, tipo, saldo, 100.0);
+            CuentaCorriente cuenta = new CuentaCorriente(clienteServicio.proximaCuentaId(cliente), cliente, tipo, saldo, 100.0);
             System.out.println("Ingrese el límite de sobregiro en usd: ");
             double sobregiro = datos.nextDouble();
             cuenta.setLimiteSobregiro(sobregiro);
             cliente.getCuentasBancarias().add(cuenta);
         } else if ( eleccion == 1){
             String tipo = "Cuenta de ahorro";
-            CuentaDeAhorro cuenta = new CuentaDeAhorro(cliente.proximaCuentaId(), cliente, tipo, saldo,5.0);
+            CuentaDeAhorro cuenta = new CuentaDeAhorro(clienteServicio.proximaCuentaId(cliente), cliente, tipo, saldo,5.0);
             System.out.println("Ingrese la tasa de intereses (%): ");
             double intereses = datos.nextDouble();
             cuenta.setIntereses(intereses);
@@ -51,10 +68,7 @@ public class BancoServicioImpl implements BancoServicios{
         //no tengo que cerrar el Scanner porque sino da error "NoSuchElementException"
         //datos.close();
     }
-    public int proximoClienteId(Banco banco) {
-        int id = banco.getClientes().toArray().length + 1;
-        return id;
-    }
+
     public void obtenerClientes(Banco banco){
         System.out.println("### LISTA DE CLIENTES ###" );
         if (banco.getClientes().isEmpty()){
@@ -68,7 +82,7 @@ public class BancoServicioImpl implements BancoServicios{
         }
     }
     @Override
-    public void eliminarCuenta(Banco banco) {
+    public void eliminarCliente(Banco banco) {
         System.out.println("### ELIMINAR CLIENTE ###" );
         Scanner datos = new Scanner(System.in);
         banco.listarClientes();

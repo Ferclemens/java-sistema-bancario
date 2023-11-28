@@ -52,12 +52,6 @@ public class Cliente {
         this.cuentas = cuentasBancarias;
     }
 
-    public int proximaCuentaId() {
-        //Mejorar: si elimino un cliente los ids nuevos se pisan.
-        int id = cuentas.toArray().length + 1;
-        //System.out.println("Proximo ID " + id);
-        return id;
-    }
     public void detalle() {
         System.out.println("------------------Cliente-------------------" +
                 "\nID: "+ id +" | nombre: " + nombre +" | dirección: " + direccion);

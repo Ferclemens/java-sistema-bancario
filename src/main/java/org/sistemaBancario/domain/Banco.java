@@ -1,13 +1,7 @@
 package org.sistemaBancario.domain;
 
-import com.opencsv.CSVWriter;
-import org.sistemaBancario.servicios.BancoServicios;
-
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Banco {
     private List<Cliente> clientes;
