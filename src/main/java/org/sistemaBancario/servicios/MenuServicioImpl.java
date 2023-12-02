@@ -14,7 +14,8 @@ public class MenuServicioImpl {
         CuentaBancariaServicioImpl cuentaServicio = new CuentaBancariaServicioImpl();
         CuentaCorrienteServicioImpl cuentaCorrienteServicio = new CuentaCorrienteServicioImpl();
         CuentaDeAhorroServicioImpl cuentaDeAhorroServicio = new CuentaDeAhorroServicioImpl();
-        MenuBancoServicioImpl menuBancoServicio= new MenuBancoServicioImpl();
+        MenuBancoServicioImpl menuBancoServicio = new MenuBancoServicioImpl();
+        MenuClienteServicioImpl menuClienteServicio = new MenuClienteServicioImpl();
 
         //hardcode de clientes
         Cliente cliente1 = new Cliente(1,"Leo Messi","calle 123");
@@ -55,7 +56,7 @@ public class MenuServicioImpl {
                 case 1:
                     //Agregar cliente nuevo - test manual OK
                     Cliente clienteNuevo = menuBancoServicio.lecturaClienteNuevo(bancoPrintLine, bancoServicio);
-                    CuentaBancaria cuentaNueva = menuBancoServicio.lecturaCuentaBancariaNueva(clienteNuevo,clienteServicio);
+                    CuentaBancaria cuentaNueva = menuClienteServicio.lecturaCuentaBancariaNueva(clienteNuevo,clienteServicio);
                     bancoServicio.agregarCliente(bancoPrintLine, clienteNuevo, cuentaNueva);
                     break;
                 case 2:

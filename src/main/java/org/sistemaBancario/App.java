@@ -16,7 +16,7 @@ public class App
         //  (x)  aplicar interfaces
         //  (x)  BUG: IDs de cuentas se pisa al eliminar un cliente.
         //  (x)  BUG: se dispara el else en varios if de selección.
-        //  (x)  REFACTORIZAR.
+        //  (-)  REFACTORIZAR.
         //  (x)  Hacer editable el destino del exportable (CSV).
     }
 }
