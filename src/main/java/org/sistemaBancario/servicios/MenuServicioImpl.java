@@ -4,7 +4,7 @@ import org.sistemaBancario.domain.*;
 
 import java.util.Scanner;
 
-public class MenuServicioImpl {
+public class MenuServicioImpl implements MenuServicio {
     public void desplegarMenu(){
         System.out.println("####### BIENVENIDOS AL BANCO PRINT-LINE ########");
         //inicializamos el banco y los servicios
@@ -16,6 +16,7 @@ public class MenuServicioImpl {
         CuentaDeAhorroServicioImpl cuentaDeAhorroServicio = new CuentaDeAhorroServicioImpl();
         MenuBancoServicioImpl menuBancoServicio = new MenuBancoServicioImpl();
         MenuClienteServicioImpl menuClienteServicio = new MenuClienteServicioImpl();
+        MenuExportarDatosImpl menuExportarDatos = new MenuExportarDatosImpl();
 
         //hardcode de clientes
         Cliente cliente1 = new Cliente(1,"Leo Messi","calle 123");
@@ -95,7 +96,7 @@ public class MenuServicioImpl {
                     break;
                 case 9:
                     //Exportar lista de clientes - test manual OK
-                    bancoServicio.exportarListaDeClientes(bancoPrintLine);
+                    menuExportarDatos.exportarListaDeClientes(bancoPrintLine);
                     break;
                 case 10:
                     //editar sobregiro de cuenta corriente - test manual OK

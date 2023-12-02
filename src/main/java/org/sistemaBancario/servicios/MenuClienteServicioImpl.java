@@ -7,7 +7,7 @@ import org.sistemaBancario.domain.CuentaDeAhorro;
 
 import java.util.Scanner;
 
-public class MenuClienteServicioImpl {
+public class MenuClienteServicioImpl implements MenuClienteServicio {
     public CuentaBancaria lecturaCuentaBancariaNueva(Cliente cliente, ClienteServicioImpl clienteServicio){
         CuentaBancaria cuenta = null;
         Scanner datos = new Scanner(System.in);
