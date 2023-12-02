@@ -56,16 +56,22 @@ public class MenuServicioImpl implements MenuServicio {
             switch (seleccion){
                 case 1:
                     //Agregar cliente nuevo - test manual OK
-                    Cliente clienteNuevo = menuBancoServicio.lecturaClienteNuevo(bancoPrintLine, bancoServicio);
+                    System.out.println("### CREAR CUENTA BANCARIA ###");
+                    Cliente clienteNuevo = menuBancoServicio.lecturaClienteNuevo(bancoPrintLine);
                     CuentaBancaria cuentaNueva = menuClienteServicio.lecturaCuentaBancariaNueva(clienteNuevo,clienteServicio);
                     bancoServicio.agregarCliente(bancoPrintLine, clienteNuevo, cuentaNueva);
                     break;
                 case 2:
                     //Agregar cuenta a cliente existente - test manual OK
-                    clienteServicio.agregarCuenta(bancoPrintLine);
+                    System.out.println("### AGREGAR CUENTA BANCARIA A CLIENTE EXISTENTE ###" );
+                    bancoServicio.obtenerClientes(bancoPrintLine);
+                    Cliente clienteParaAgregarCuenta = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    CuentaBancaria nuevaCuenta = menuClienteServicio.lecturaCuentaBancariaNueva(clienteParaAgregarCuenta,clienteServicio);
+                    clienteServicio.agregarCuenta(clienteParaAgregarCuenta, nuevaCuenta);
                     break;
                 case 3:
                     //Listar clientes del banco - test manual OK
+                    System.out.println("### LISTA DE CLIENTES ###" );
                     bancoServicio.obtenerClientes(bancoPrintLine);
                     break;
                 case 4:
@@ -76,10 +82,13 @@ public class MenuServicioImpl implements MenuServicio {
                     break;
                 case 5:
                     //Eliminar cliente - test manual OK
-                    bancoServicio.eliminarCliente(bancoPrintLine);
+                    System.out.println("### ELIMINAR CLIENTE ###" );
+                    Cliente clienteAEliminar = menuBancoServicio.lecturaClienteAEliminar(bancoPrintLine);
+                    bancoServicio.eliminarCliente(bancoPrintLine, clienteAEliminar);
                     break;
                 case 6:
                     //Eliminar cuenta de cliente - test manual OK
+                    System.out.println("### ELIMINAR CUENTA DE CLIENTE ###" );
                     clienteServicio.eliminarCuenta(bancoPrintLine);
                     break;
                 case 7:

@@ -5,8 +5,7 @@ import org.sistemaBancario.domain.Cliente;
 import org.sistemaBancario.domain.CuentaBancaria;
 
 public interface BancoServicio {
-    int proximoClienteId(Banco banco);
     void agregarCliente(Banco banco,Cliente cliente, CuentaBancaria cuenta);
-    void eliminarCliente(Banco banco);
+    void eliminarCliente(Banco banco, Cliente cliente);
     Cliente seleccionarCliente(Banco banco);
 }

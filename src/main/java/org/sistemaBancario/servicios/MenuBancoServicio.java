@@ -5,5 +5,6 @@ import org.sistemaBancario.domain.Cliente;
 import org.sistemaBancario.domain.CuentaBancaria;
 
 public interface MenuBancoServicio {
-    Cliente lecturaClienteNuevo(Banco banco, BancoServicioImpl bancoServicio);
+    int proximoClienteId(Banco banco);
+    Cliente lecturaClienteNuevo(Banco banco);
 }
