@@ -50,21 +50,18 @@ public class MenuBancoServicioImpl implements MenuBancoServicio {
     public Cliente lecturaSeleccionarCliente(Banco banco, BancoServicioImpl bancoServicio) {
         Cliente clienteSeleccionado = null;
         bancoServicio.obtenerClientes(banco);
-        do {
-            Scanner datos = new Scanner(System.in);
-            System.out.println("seleccione el ID del cliente: ");
-            int id = datos.nextInt();
-            for (Cliente cliente: banco.getClientes()) {
-                if(cliente.getId() == id){
-                    clienteSeleccionado = cliente;
-                    break;
-                }
+        Scanner datos = new Scanner(System.in);
+        System.out.println("seleccione el ID del cliente: ");
+        int id = datos.nextInt();
+        for (Cliente cliente: banco.getClientes()) {
+            if(cliente.getId() == id){
+                clienteSeleccionado = cliente;
+                break;
             }
-            if (clienteSeleccionado == null) {
-                System.out.println("no existe cliente con ese ID, seleccione de nuevo.");
-            }
-        } while (clienteSeleccionado == null);
-
+        }
+        if (clienteSeleccionado == null) {
+            System.out.println("no existe cliente.");
+        }
         return clienteSeleccionado;
     }
 }

@@ -7,6 +7,6 @@ import org.sistemaBancario.domain.CuentaBancaria;
 public interface MenuClienteServicio {
     int proximaCuentaId(Cliente cliente);
     CuentaBancaria lecturaCuentaBancariaNueva(Cliente cliente);
-    CuentaBancaria lecturaCuentaAEliminar(Banco banco, BancoServicioImpl bancoServicio);
+    CuentaBancaria lecturaCuentaAEliminar(Cliente cliente);
     CuentaBancaria seleccionarCuenta(Cliente cliente);
 }

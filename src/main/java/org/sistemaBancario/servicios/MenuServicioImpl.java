@@ -89,7 +89,7 @@ public class MenuServicioImpl implements MenuServicio {
                     //Eliminar cuenta de cliente - test manual OK
                     System.out.println("### ELIMINAR CUENTA DE CLIENTE ###" );
                     Cliente clienteParaEliminarCuenta = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
-                    CuentaBancaria cuentaAEliminar = menuClienteServicio.lecturaCuentaAEliminar(bancoPrintLine, bancoServicio);
+                    CuentaBancaria cuentaAEliminar = menuClienteServicio.lecturaCuentaAEliminar(clienteParaEliminarCuenta);
                     clienteServicio.eliminarCuenta(bancoPrintLine, clienteParaEliminarCuenta, cuentaAEliminar);
                     break;
                 case 7:

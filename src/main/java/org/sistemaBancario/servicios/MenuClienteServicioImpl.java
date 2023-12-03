@@ -57,28 +57,19 @@ public class MenuClienteServicioImpl implements MenuClienteServicio {
         return cuentaNueva;
     }
     @Override
-    public CuentaBancaria lecturaCuentaAEliminar(Banco banco, BancoServicioImpl bancoServicio){
+    public CuentaBancaria lecturaCuentaAEliminar(Cliente cliente){
         CuentaBancaria cuentaAEliminar = null;
         Scanner datos = new Scanner(System.in);
-        bancoServicio.obtenerClientes(banco);
-        System.out.println("seleccione el ID del cliente: ");
-        int id = datos.nextInt();
-        Cliente clienteParaEliminarCuentas = null;
-        for (Cliente cliente: banco.getClientes()) {
-            if(cliente.getId() == id){
-                clienteParaEliminarCuentas = cliente;
-            }
-        }
-        if(clienteParaEliminarCuentas != null){
-            System.out.println("---------------------Cuenta/s de " +clienteParaEliminarCuentas.getNombre()
+        if(cliente != null){
+            System.out.println("---------------------Cuenta/s de " + cliente.getNombre()
                     + "------------------------");
-            for (CuentaBancaria cuentaPrint: clienteParaEliminarCuentas.getCuentasBancarias() ) {
-                System.out.println("ID: " + cuentaPrint.getCuentaID() + " | tipo: " + cuentaPrint.getTipo() +
-                        " | saldo: " + cuentaPrint.getSaldo());
+            for (CuentaBancaria cuenta: cliente.getCuentasBancarias() ) {
+                System.out.println("ID: " + cuenta.getCuentaID() + " | tipo: " + cuenta.getTipo() +
+                        " | saldo: " + cuenta.getSaldo());
             }
             System.out.println("seleccione el ID de la cuenta bancaria a eliminar: ");
             int cuentaId = datos.nextInt();
-            for(CuentaBancaria cuenta: clienteParaEliminarCuentas.getCuentasBancarias()){
+            for(CuentaBancaria cuenta: cliente.getCuentasBancarias()){
                 if (cuenta.getCuentaID() == cuentaId) {
                     cuentaAEliminar = cuenta;
                 }
