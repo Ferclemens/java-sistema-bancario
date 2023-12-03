@@ -17,7 +17,7 @@ public class BancoServicioImpl implements BancoServicio {
         System.out.println("### Cliente nuevo creado con éxito ###");
         System.out.println("---------------------------------------------");
     }
-
+    @Override
     public void obtenerClientes(Banco banco){
         if (banco.getClientes().isEmpty()){
             System.out.println("---------------------------------------------");
@@ -41,25 +41,5 @@ public class BancoServicioImpl implements BancoServicio {
             System.out.println("### cliente eliminado con éxito ###");
             System.out.println("---------------------------------------------");
         }
-    }
-    @Override
-    public Cliente seleccionarCliente(Banco banco) {
-        Cliente clienteSeleccionado = null;
-        do {
-            Scanner datos = new Scanner(System.in);
-            System.out.println("seleccione el ID del cliente: ");
-            int id = datos.nextInt();
-            for (Cliente cliente: banco.getClientes()) {
-                if(cliente.getId() == id){
-                    clienteSeleccionado = cliente;
-                    break;
-                }
-            }
-            if (clienteSeleccionado == null) {
-                System.out.println("no existe cliente con ese ID, seleccione de nuevo.");
-            }
-        } while (clienteSeleccionado == null);
-
-        return clienteSeleccionado;
     }
 }

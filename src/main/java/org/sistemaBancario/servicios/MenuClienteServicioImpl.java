@@ -1,15 +1,30 @@
 package org.sistemaBancario.servicios;
 
-import org.sistemaBancario.domain.Cliente;
-import org.sistemaBancario.domain.CuentaBancaria;
-import org.sistemaBancario.domain.CuentaCorriente;
-import org.sistemaBancario.domain.CuentaDeAhorro;
+import org.sistemaBancario.domain.*;
 
 import java.util.Scanner;
 
 public class MenuClienteServicioImpl implements MenuClienteServicio {
-    public CuentaBancaria lecturaCuentaBancariaNueva(Cliente cliente, ClienteServicioImpl clienteServicio){
-        CuentaBancaria cuenta = null;
+    //variable global para setear id's de CuentasBancarias de cliente
+    public int ultimoIdCuenta = 0;
+    @Override
+    public int proximaCuentaId(Cliente cliente) {
+        System.out.println("ultimoId Cuenta = " + ultimoIdCuenta);
+        int id = 0;
+        int longitudArray = cliente.getCuentasBancarias().toArray().length;
+        if(longitudArray > ultimoIdCuenta){
+            ultimoIdCuenta = longitudArray + 1;
+            id = ultimoIdCuenta;
+        } else {
+            ultimoIdCuenta = ultimoIdCuenta + 1;
+            id = ultimoIdCuenta;
+            System.out.println("NUEVO ultimoId Cuenta = " + ultimoIdCuenta);
+        }
+        return id;
+    }
+    @Override
+    public CuentaBancaria lecturaCuentaBancariaNueva(Cliente cliente){
+        CuentaBancaria cuentaNueva = null;
         Scanner datos = new Scanner(System.in);
         System.out.println("Ingrese saldo en usd:");
         double saldo = datos.nextDouble();
@@ -22,23 +37,75 @@ public class MenuClienteServicioImpl implements MenuClienteServicio {
         }
         if( eleccion == 2){
             String tipo = "Cuenta Corriente";
-            CuentaCorriente cuentaCorriente = new CuentaCorriente(clienteServicio.proximaCuentaId(cliente), cliente, tipo, saldo, 100.0);
+            CuentaCorriente cuentaCorriente = new CuentaCorriente(proximaCuentaId(cliente), cliente, tipo, saldo, 100.0);
             System.out.println("Ingrese el límite de sobregiro en usd: ");
             double sobregiro = datos.nextDouble();
             cuentaCorriente.setLimiteSobregiro(sobregiro);
             //cliente.getCuentasBancarias().add(cuenta);
-            cuenta = cuentaCorriente;
+            cuentaNueva = cuentaCorriente;
         } else if ( eleccion == 1){
             String tipo = "Cuenta de ahorro";
-            CuentaDeAhorro cuentaAhorro = new CuentaDeAhorro(clienteServicio.proximaCuentaId(cliente), cliente, tipo, saldo,5.0);
+            CuentaDeAhorro cuentaAhorro = new CuentaDeAhorro(proximaCuentaId(cliente), cliente, tipo, saldo,5.0);
             System.out.println("Ingrese la tasa de intereses (%): ");
             double intereses = datos.nextDouble();
             cuentaAhorro.setIntereses(intereses);
             //cliente.getCuentasBancarias().add(cuenta);
-            cuenta = cuentaAhorro;
+            cuentaNueva = cuentaAhorro;
         } else {
             System.out.println("Error. Seleccione una de las 2 opciones de cuenta: ");
         }
-        return cuenta;
+        return cuentaNueva;
+    }
+    @Override
+    public CuentaBancaria lecturaCuentaAEliminar(Banco banco, BancoServicioImpl bancoServicio){
+        CuentaBancaria cuentaAEliminar = null;
+        Scanner datos = new Scanner(System.in);
+        bancoServicio.obtenerClientes(banco);
+        System.out.println("seleccione el ID del cliente: ");
+        int id = datos.nextInt();
+        Cliente clienteParaEliminarCuentas = null;
+        for (Cliente cliente: banco.getClientes()) {
+            if(cliente.getId() == id){
+                clienteParaEliminarCuentas = cliente;
+            }
+        }
+        if(clienteParaEliminarCuentas != null){
+            System.out.println("---------------------Cuenta/s de " +clienteParaEliminarCuentas.getNombre()
+                    + "------------------------");
+            for (CuentaBancaria cuentaPrint: clienteParaEliminarCuentas.getCuentasBancarias() ) {
+                System.out.println("ID: " + cuentaPrint.getCuentaID() + " | tipo: " + cuentaPrint.getTipo() +
+                        " | saldo: " + cuentaPrint.getSaldo());
+            }
+            System.out.println("seleccione el ID de la cuenta bancaria a eliminar: ");
+            int cuentaId = datos.nextInt();
+            for(CuentaBancaria cuenta: clienteParaEliminarCuentas.getCuentasBancarias()){
+                if (cuenta.getCuentaID() == cuentaId) {
+                    cuentaAEliminar = cuenta;
+                }
+            }
+        } else {
+            System.out.println("---------------------------------------------");
+            System.out.println("### cliente no existe ###");
+            System.out.println("---------------------------------------------");
+        }
+        return cuentaAEliminar;
+    }
+    @Override
+    public CuentaBancaria seleccionarCuenta(Cliente cliente) {
+        CuentaBancaria cuentaSeleccionada = null;
+        while (cuentaSeleccionada == null){
+            Scanner datos = new Scanner(System.in);
+            System.out.println("seleccione el ID de la cuenta: ");
+            int id = datos.nextInt();
+            for (CuentaBancaria cuenta: cliente.getCuentasBancarias()) {
+                if(cuenta.getCuentaID() == id){
+                    cuentaSeleccionada = cuenta;
+                }
+            }
+            if (cuentaSeleccionada == null) {
+                System.out.println("no existe cuenta con ese ID, seleccione de nuevo.");
+            }
+        }
+        return cuentaSeleccionada;
     }
 }

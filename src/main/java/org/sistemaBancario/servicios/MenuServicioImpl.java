@@ -58,15 +58,14 @@ public class MenuServicioImpl implements MenuServicio {
                     //Agregar cliente nuevo - test manual OK
                     System.out.println("### CREAR CUENTA BANCARIA ###");
                     Cliente clienteNuevo = menuBancoServicio.lecturaClienteNuevo(bancoPrintLine);
-                    CuentaBancaria cuentaNueva = menuClienteServicio.lecturaCuentaBancariaNueva(clienteNuevo,clienteServicio);
+                    CuentaBancaria cuentaNueva = menuClienteServicio.lecturaCuentaBancariaNueva(clienteNuevo);
                     bancoServicio.agregarCliente(bancoPrintLine, clienteNuevo, cuentaNueva);
                     break;
                 case 2:
                     //Agregar cuenta a cliente existente - test manual OK
                     System.out.println("### AGREGAR CUENTA BANCARIA A CLIENTE EXISTENTE ###" );
-                    bancoServicio.obtenerClientes(bancoPrintLine);
-                    Cliente clienteParaAgregarCuenta = bancoServicio.seleccionarCliente(bancoPrintLine);
-                    CuentaBancaria nuevaCuenta = menuClienteServicio.lecturaCuentaBancariaNueva(clienteParaAgregarCuenta,clienteServicio);
+                    Cliente clienteParaAgregarCuenta = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
+                    CuentaBancaria nuevaCuenta = menuClienteServicio.lecturaCuentaBancariaNueva(clienteParaAgregarCuenta);
                     clienteServicio.agregarCuenta(clienteParaAgregarCuenta, nuevaCuenta);
                     break;
                 case 3:
@@ -76,31 +75,33 @@ public class MenuServicioImpl implements MenuServicio {
                     break;
                 case 4:
                     //Ver saldo de cuentas de un cliente - test manual OK
-                    bancoServicio.obtenerClientes(bancoPrintLine);
-                    Cliente clienteParaVerSaldo = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    System.out.println("### SALDO/S DE CUENTA/S CLIENTE ###" );
+                    Cliente clienteParaVerSaldo = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
                     cuentaServicio.verSaldo(clienteParaVerSaldo);
                     break;
                 case 5:
                     //Eliminar cliente - test manual OK
                     System.out.println("### ELIMINAR CLIENTE ###" );
-                    Cliente clienteAEliminar = menuBancoServicio.lecturaClienteAEliminar(bancoPrintLine);
+                    Cliente clienteAEliminar = menuBancoServicio.lecturaClienteAEliminar(bancoPrintLine, bancoServicio);
                     bancoServicio.eliminarCliente(bancoPrintLine, clienteAEliminar);
                     break;
                 case 6:
                     //Eliminar cuenta de cliente - test manual OK
                     System.out.println("### ELIMINAR CUENTA DE CLIENTE ###" );
-                    clienteServicio.eliminarCuenta(bancoPrintLine);
+                    Cliente clienteParaEliminarCuenta = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
+                    CuentaBancaria cuentaAEliminar = menuClienteServicio.lecturaCuentaAEliminar(bancoPrintLine, bancoServicio);
+                    clienteServicio.eliminarCuenta(bancoPrintLine, clienteParaEliminarCuenta, cuentaAEliminar);
                     break;
                 case 7:
-                    //Depositar - test manual OK
+                    //Depositar
                     bancoServicio.obtenerClientes(bancoPrintLine);
-                    Cliente clienteParaDepositar = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    Cliente clienteParaDepositar = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
                     cuentaServicio.depositar(clienteParaDepositar);
                     break;
                 case 8:
-                    //Retirar - test manual OK
+                    //Retirar
                     bancoServicio.obtenerClientes(bancoPrintLine);
-                    Cliente clienteParaRetirar = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    Cliente clienteParaRetirar = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
                     cuentaServicio.retirar(clienteParaRetirar);
                     break;
                 case 9:
@@ -108,27 +109,27 @@ public class MenuServicioImpl implements MenuServicio {
                     menuExportarDatos.exportarListaDeClientes(bancoPrintLine);
                     break;
                 case 10:
-                    //editar sobregiro de cuenta corriente - test manual OK
+                    //editar sobregiro de cuenta corriente
                     bancoServicio.obtenerClientes(bancoPrintLine);
-                    Cliente clienteSeleccionadoSobregiro = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    Cliente clienteSeleccionadoSobregiro = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
                     cuentaServicio.verSaldo(clienteSeleccionadoSobregiro);
-                    CuentaBancaria cuentaParaEditarSobregiro = clienteServicio.seleccionarCuenta(clienteSeleccionadoSobregiro);
+                    CuentaBancaria cuentaParaEditarSobregiro = menuClienteServicio.seleccionarCuenta(clienteSeleccionadoSobregiro);
                     cuentaCorrienteServicio.editarSobregiro(cuentaParaEditarSobregiro);
                     break;
                 case 11:
-                    //editar intereses de cuenta de ahorro- test manual OK
+                    //editar intereses de cuenta de ahorro
                     bancoServicio.obtenerClientes(bancoPrintLine);
-                    Cliente clienteSeleccionadoIntereses = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    Cliente clienteSeleccionadoIntereses = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
                     cuentaServicio.verSaldo(clienteSeleccionadoIntereses);
-                    CuentaBancaria cuentaParaEditarIntereses = clienteServicio.seleccionarCuenta(clienteSeleccionadoIntereses);
+                    CuentaBancaria cuentaParaEditarIntereses = menuClienteServicio.seleccionarCuenta(clienteSeleccionadoIntereses);
                     cuentaDeAhorroServicio.editarIntereses(cuentaParaEditarIntereses);
                     break;
                 case 12:
-                    //generar intereses en cuenta de ahorro - test manual OK
+                    //generar intereses en cuenta de ahorro
                     bancoServicio.obtenerClientes(bancoPrintLine);
-                    Cliente clienteSaldoConIntereses = bancoServicio.seleccionarCliente(bancoPrintLine);
+                    Cliente clienteSaldoConIntereses = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
                     cuentaServicio.verSaldo(clienteSaldoConIntereses);
-                    CuentaBancaria cuentaParaSumarIntereses = clienteServicio.seleccionarCuenta(clienteSaldoConIntereses);
+                    CuentaBancaria cuentaParaSumarIntereses = menuClienteServicio.seleccionarCuenta(clienteSaldoConIntereses);
                     cuentaDeAhorroServicio.SumarInteresesACuenta(cuentaParaSumarIntereses);
                     break;
                 default:
