@@ -17,6 +17,7 @@ public class MenuServicioImpl implements MenuServicio {
         MenuBancoServicioImpl menuBancoServicio = new MenuBancoServicioImpl();
         MenuClienteServicioImpl menuClienteServicio = new MenuClienteServicioImpl();
         MenuExportarDatosImpl menuExportarDatos = new MenuExportarDatosImpl();
+        MenuCuentaBancariaServicioImpl menuCuentabancariaSerivio = new MenuCuentaBancariaServicioImpl();
 
         //hardcode de clientes
         Cliente cliente1 = new Cliente(1,"Leo Messi","calle 123");
@@ -75,7 +76,7 @@ public class MenuServicioImpl implements MenuServicio {
                     break;
                 case 4:
                     //Ver saldo de cuentas de un cliente - test manual OK
-                    System.out.println("### SALDO/S DE CUENTA/S CLIENTE ###" );
+                    System.out.println("### SALDO/S DE CUENTA/S DE CLIENTE/S ###" );
                     Cliente clienteParaVerSaldo = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
                     cuentaServicio.verSaldo(clienteParaVerSaldo);
                     break;
@@ -94,9 +95,20 @@ public class MenuServicioImpl implements MenuServicio {
                     break;
                 case 7:
                     //Depositar
-                    bancoServicio.obtenerClientes(bancoPrintLine);
+                    System.out.println("### DEPOSITAR SALDO EN CUENTA ###" );
                     Cliente clienteParaDepositar = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
-                    cuentaServicio.depositar(clienteParaDepositar);
+                    if(clienteParaDepositar != null){
+                        cuentaServicio.verSaldo(clienteParaDepositar);
+                        CuentaBancaria cuentaParaDeposito = menuClienteServicio.seleccionarCuenta(clienteParaDepositar);
+                        if(cuentaParaDeposito != null){
+                            Double deposito = menuCuentabancariaSerivio.lecturaSaldoParaDepositar();
+                            cuentaServicio.depositar(cuentaParaDeposito, deposito);
+                        } else{
+                            break;
+                        }
+                    } else {
+                        break;
+                    }
                     break;
                 case 8:
                     //Retirar

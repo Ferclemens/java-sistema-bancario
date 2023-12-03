@@ -6,7 +6,7 @@ import org.sistemaBancario.domain.CuentaCorriente;
 
 public interface CuentaBancariaServicio {
     void verSaldo(Cliente cliente);
-    void depositar(Cliente cliente);
+    void depositar(CuentaBancaria cuenta, double deposito);
     void retirar(Cliente cliente);
 
 }

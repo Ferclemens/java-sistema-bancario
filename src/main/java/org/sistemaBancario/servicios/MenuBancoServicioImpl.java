@@ -60,7 +60,9 @@ public class MenuBancoServicioImpl implements MenuBancoServicio {
             }
         }
         if (clienteSeleccionado == null) {
-            System.out.println("no existe cliente.");
+            System.out.println("---------------------------------------------");
+            System.out.println("### No existe cliente con ese ID ###.");
+            System.out.println("---------------------------------------------");
         }
         return clienteSeleccionado;
     }

@@ -84,18 +84,19 @@ public class MenuClienteServicioImpl implements MenuClienteServicio {
     @Override
     public CuentaBancaria seleccionarCuenta(Cliente cliente) {
         CuentaBancaria cuentaSeleccionada = null;
-        while (cuentaSeleccionada == null){
-            Scanner datos = new Scanner(System.in);
-            System.out.println("seleccione el ID de la cuenta: ");
-            int id = datos.nextInt();
-            for (CuentaBancaria cuenta: cliente.getCuentasBancarias()) {
-                if(cuenta.getCuentaID() == id){
-                    cuentaSeleccionada = cuenta;
-                }
+
+        Scanner datos = new Scanner(System.in);
+        System.out.println("seleccione el ID de la cuenta: ");
+        int id = datos.nextInt();
+        for (CuentaBancaria cuenta: cliente.getCuentasBancarias()) {
+            if(cuenta.getCuentaID() == id){
+                cuentaSeleccionada = cuenta;
             }
-            if (cuentaSeleccionada == null) {
-                System.out.println("no existe cuenta con ese ID, seleccione de nuevo.");
-            }
+        }
+        if (cuentaSeleccionada == null) {
+            System.out.println("---------------------------------------------");
+            System.out.println("### No existe cuenta con ese ID. ###");
+            System.out.println("---------------------------------------------");
         }
         return cuentaSeleccionada;
     }
