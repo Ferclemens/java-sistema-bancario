@@ -12,46 +12,36 @@ public class Cliente {
 
     public Cliente() {
     }
-
     public Cliente(int id, String nombre, String direccion) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
         this.cuentas = new ArrayList<>();
     }
-
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
     public String getNombre() {
         return nombre;
     }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
     public String getDireccion() {
         return direccion;
     }
-
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-
     public List<CuentaBancaria> getCuentasBancarias() {
         return cuentas;
     }
-
     public void setCuentasBancarias(List<CuentaBancaria> cuentasBancarias) {
         this.cuentas = cuentasBancarias;
     }
-
     public void detalle() {
         System.out.println("------------------Cliente-------------------" +
                 "\nID: "+ id +" | nombre: " + nombre +" | dirección: " + direccion);
