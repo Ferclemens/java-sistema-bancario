@@ -51,40 +51,37 @@ public class CuentaBancariaServicioImpl implements CuentaBancariaServicio {
         }
     }
     @Override
-    public void retirar(Cliente cliente){
-        System.out.println("### RETIRAR SALDO EN CUENTA ###" );
-        Scanner datos = new Scanner(System.in);
-        verSaldo(cliente);
-        System.out.println("seleccione el ID de la cuenta para el retiro: ");
-        int idCuenta = datos.nextInt();
-        CuentaBancaria cuentaParaRetirar = null;
-        for (CuentaBancaria cuenta: cliente.getCuentasBancarias()) {
-            if(idCuenta == cuenta.getCuentaID()){
-                cuentaParaRetirar = cuenta;
-            }
-        }
-        if (cuentaParaRetirar != null) {
-            System.out.println("ingrese el monto a retirar: ");
-            double retiro = datos.nextDouble();
-            double nuevoSaldo = cuentaParaRetirar.getSaldo() - retiro;
-            if(cuentaParaRetirar instanceof CuentaCorriente &&
-                    nuevoSaldo < (((CuentaCorriente) cuentaParaRetirar).getLimiteSobregiro() * -1)){
-                System.out.println("------------------------------------------------------------------");
-                System.out.println("Retiro cancelado - El retiro excede el saldo disponible: " + cuentaParaRetirar.getSaldo()
-                        + " usd" + "\n + el límite de sobregiro: " + ((CuentaCorriente) cuentaParaRetirar).getLimiteSobregiro()
-                        + " usd");
-                System.out.println("------------------------------------------------------------------");
-                } else if (cuentaParaRetirar instanceof CuentaDeAhorro && retiro > cuentaParaRetirar.getSaldo()) {
-                System.out.println("------------------------------------------------------------------");
-                System.out.println("Retiro cancelado - El retiro excede el saldo disponible: " + cuentaParaRetirar.getSaldo()
-                        + " usd");
-                System.out.println("------------------------------------------------------------------");
-            } else {
-                    cuentaParaRetirar.setSaldo(cuentaParaRetirar.getSaldo()-retiro);
+    public void retirar(CuentaBancaria cuenta, double retiro){
+        if (cuenta != null) {
+            if(cuenta instanceof CuentaCorriente){
+                double limiteCC = ((CuentaCorriente) cuenta).getLimiteSobregiro() + cuenta.getSaldo();
+                //System.out.println("limite CC " + limiteCC);
+                if(retiro > limiteCC){
+                    System.out.println("------------------------------------------------------------------");
+                    System.out.println("Retiro cancelado - El retiro excede el límite: " + limiteCC
+                            + " usd");
+                    System.out.println("------------------------------------------------------------------");
+                } else {
+                    cuenta.setSaldo(cuenta.getSaldo() - retiro);
                     System.out.println("---------------------------------------------");
                     System.out.println("### Saldo retirado con éxito ### ");
                     System.out.println("---------------------------------------------");
                 }
+            } else if (cuenta instanceof CuentaDeAhorro) {
+                double limiteCA = cuenta.getSaldo();
+                //System.out.println("limite CA " + limiteCA);
+                if(retiro > limiteCA){
+                    System.out.println("------------------------------------------------------------------");
+                    System.out.println("Retiro cancelado - El retiro excede el saldo disponible: " + limiteCA
+                            + " usd");
+                    System.out.println("------------------------------------------------------------------");
+                } else {
+                    cuenta.setSaldo(cuenta.getSaldo() - retiro);
+                    System.out.println("---------------------------------------------");
+                    System.out.println("### Saldo retirado con éxito ### ");
+                    System.out.println("---------------------------------------------");
+                }
+            }
         } else {
             System.out.println("---------------------------------------------");
             System.out.println("### No existe cuenta elegida ###");

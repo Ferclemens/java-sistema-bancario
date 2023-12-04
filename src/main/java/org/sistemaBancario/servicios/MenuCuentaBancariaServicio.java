@@ -1,5 +1,6 @@
 package org.sistemaBancario.servicios;
 
 public interface MenuCuentaBancariaServicio {
-    double lecturaSaldoParaDepositar();
+    double lecturaMontoParaDepositar();
+    double lecturaMontoParaRetirar();
 }

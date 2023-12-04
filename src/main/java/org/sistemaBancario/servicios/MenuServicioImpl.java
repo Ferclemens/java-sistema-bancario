@@ -17,7 +17,7 @@ public class MenuServicioImpl implements MenuServicio {
         MenuBancoServicioImpl menuBancoServicio = new MenuBancoServicioImpl();
         MenuClienteServicioImpl menuClienteServicio = new MenuClienteServicioImpl();
         MenuExportarDatosImpl menuExportarDatos = new MenuExportarDatosImpl();
-        MenuCuentaBancariaServicioImpl menuCuentabancariaSerivio = new MenuCuentaBancariaServicioImpl();
+        MenuCuentaBancariaServicioImpl menuCuentabancariaServicio = new MenuCuentaBancariaServicioImpl();
 
         //hardcode de clientes
         Cliente cliente1 = new Cliente(1,"Leo Messi","calle 123");
@@ -101,7 +101,7 @@ public class MenuServicioImpl implements MenuServicio {
                         cuentaServicio.verSaldo(clienteParaDepositar);
                         CuentaBancaria cuentaParaDeposito = menuClienteServicio.seleccionarCuenta(clienteParaDepositar);
                         if(cuentaParaDeposito != null){
-                            Double deposito = menuCuentabancariaSerivio.lecturaSaldoParaDepositar();
+                            Double deposito = menuCuentabancariaServicio.lecturaMontoParaDepositar();
                             cuentaServicio.depositar(cuentaParaDeposito, deposito);
                         } else{
                             break;
@@ -112,9 +112,20 @@ public class MenuServicioImpl implements MenuServicio {
                     break;
                 case 8:
                     //Retirar
-                    bancoServicio.obtenerClientes(bancoPrintLine);
-                    Cliente clienteParaRetirar = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
-                    cuentaServicio.retirar(clienteParaRetirar);
+                    System.out.println("### RETIRAR SALDO EN CUENTA ###" );
+                    Cliente clienteParaRetiro = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
+                    if(clienteParaRetiro != null){
+                        cuentaServicio.verSaldo(clienteParaRetiro);
+                        CuentaBancaria cuentaParaRetiro = menuClienteServicio.seleccionarCuenta(clienteParaRetiro);
+                        if(cuentaParaRetiro != null){
+                            Double retiro = menuCuentabancariaServicio.lecturaMontoParaRetirar();
+                            cuentaServicio.retirar(cuentaParaRetiro, retiro);
+                        } else{
+                            break;
+                        }
+                    } else {
+                        break;
+                    }
                     break;
                 case 9:
                     //Exportar lista de clientes - test manual OK
