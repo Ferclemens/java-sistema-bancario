@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class MenuBancoServicioImpl implements MenuBancoServicio {
     //variable global para setear id's de cuentas Cliente
-    public int ultimoIdCliente = 0;
+    public int ultimoIdCliente = 2;
     @Override
     public int proximoClienteId(Banco banco) {
         System.out.println("ultimoId Cliente = " + ultimoIdCliente);
@@ -61,7 +61,7 @@ public class MenuBancoServicioImpl implements MenuBancoServicio {
         }
         if (clienteSeleccionado == null) {
             System.out.println("---------------------------------------------");
-            System.out.println("### No existe cliente con ese ID ###.");
+            System.out.println("### operacion cancelada - No existe cliente con ese ID. ###");
             System.out.println("---------------------------------------------");
         }
         return clienteSeleccionado;

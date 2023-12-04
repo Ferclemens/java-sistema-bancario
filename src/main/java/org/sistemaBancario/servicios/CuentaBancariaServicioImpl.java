@@ -30,10 +30,6 @@ public class CuentaBancariaServicioImpl implements CuentaBancariaServicio {
             }
             System.out.println("SALDO TOTAL USD: " + saldoTotal);
             System.out.println("---------------------------------------------");
-        } else {
-            System.out.println("---------------------------------------------");
-            System.out.println("### cliente no encontrado ###");
-            System.out.println("---------------------------------------------");
         }
     }
     @Override
@@ -42,11 +38,11 @@ public class CuentaBancariaServicioImpl implements CuentaBancariaServicio {
             cuenta.setSaldo(cuenta.getSaldo() + deposito);
             System.out.println("---------------------------------------------");
             System.out.println("### Deposito realizado con éxito. ###");
-            System.out.println("### Nuevo saldo (usd): "+ cuenta.getSaldo() +"###");
+            System.out.println("### Nuevo saldo: "+ cuenta.getSaldo() +" usd. ###");
             System.out.println("---------------------------------------------");
         } else {
             System.out.println("---------------------------------------------");
-            System.out.println("### No existe cuenta elegida ###");
+            System.out.println("### operacion cancelada - No existe cuenta con ese ID. ###");
             System.out.println("---------------------------------------------");
         }
     }
@@ -64,7 +60,7 @@ public class CuentaBancariaServicioImpl implements CuentaBancariaServicio {
                 } else {
                     cuenta.setSaldo(cuenta.getSaldo() - retiro);
                     System.out.println("---------------------------------------------");
-                    System.out.println("### Saldo retirado con éxito ### ");
+                    System.out.println("### Saldo retirado con éxito. ### ");
                     System.out.println("---------------------------------------------");
                 }
             } else if (cuenta instanceof CuentaDeAhorro) {
@@ -78,13 +74,13 @@ public class CuentaBancariaServicioImpl implements CuentaBancariaServicio {
                 } else {
                     cuenta.setSaldo(cuenta.getSaldo() - retiro);
                     System.out.println("---------------------------------------------");
-                    System.out.println("### Saldo retirado con éxito ### ");
+                    System.out.println("### Saldo retirado con éxito. ### ");
                     System.out.println("---------------------------------------------");
                 }
             }
         } else {
             System.out.println("---------------------------------------------");
-            System.out.println("### No existe cuenta elegida ###");
+            System.out.println("### operacion cancelada - No existe cuenta con ese ID. ###");
             System.out.println("---------------------------------------------");
         }
     }

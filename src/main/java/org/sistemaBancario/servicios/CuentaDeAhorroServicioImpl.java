@@ -13,8 +13,8 @@ public class CuentaDeAhorroServicioImpl implements CuentaDeAhorroServicio {
             System.out.println("TASA INTERESES ACTUAL: " + ((CuentaDeAhorro)cuenta).getIntereses());
             ((CuentaDeAhorro)cuenta).setIntereses(nuevaTasa);
             System.out.println("---------------------------------------------");
-            System.out.println("### Tasa de intereses cambiada con éxito ###");
-            System.out.println("### Nueva Tasa de intereses: "+((CuentaDeAhorro)cuenta).getIntereses()+" usd ###");
+            System.out.println("### Tasa de interes cambiada con éxito ###");
+            System.out.println("### Nueva Tasa de interes: "+((CuentaDeAhorro)cuenta).getIntereses()+" % ###");
             System.out.println("---------------------------------------------");
         } else {
             System.out.println("-------------------------------------------------------------");

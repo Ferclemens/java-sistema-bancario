@@ -10,7 +10,7 @@ public class MenuClienteServicioImpl implements MenuClienteServicio {
     @Override
     public int proximaCuentaId(Cliente cliente) {
         System.out.println("ultimoId Cuenta = " + ultimoIdCuenta);
-        int id = 0;
+        int id = 3;
         int longitudArray = cliente.getCuentasBancarias().toArray().length;
         if(longitudArray > ultimoIdCuenta){
             ultimoIdCuenta = longitudArray + 1;
@@ -74,10 +74,11 @@ public class MenuClienteServicioImpl implements MenuClienteServicio {
                     cuentaAEliminar = cuenta;
                 }
             }
-        } else {
-            System.out.println("---------------------------------------------");
-            System.out.println("### cliente no existe ###");
-            System.out.println("---------------------------------------------");
+            if(cuentaAEliminar == null){
+                System.out.println("---------------------------------------------");
+                System.out.println("### operacion cancelada - no existe cuenta con ese ID ###");
+                System.out.println("---------------------------------------------");
+            }
         }
         return cuentaAEliminar;
     }
@@ -94,7 +95,7 @@ public class MenuClienteServicioImpl implements MenuClienteServicio {
         }
         if (cuentaSeleccionada == null) {
             System.out.println("---------------------------------------------");
-            System.out.println("### No existe cuenta con ese ID. ###");
+            System.out.println("### operacion cancelada - No existe cuenta con ese ID. ###");
             System.out.println("---------------------------------------------");
         }
         return cuentaSeleccionada;
