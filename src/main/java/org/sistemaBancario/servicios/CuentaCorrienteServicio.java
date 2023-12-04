@@ -6,5 +6,5 @@ import org.sistemaBancario.domain.CuentaCorriente;
 
 public interface CuentaCorrienteServicio {
 
-    void editarSobregiro(CuentaBancaria cuenta);
+    void editarSobregiro(CuentaBancaria cuenta, double sobregiro);
 }

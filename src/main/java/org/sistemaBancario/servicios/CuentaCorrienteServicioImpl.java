@@ -7,15 +7,13 @@ import java.util.Scanner;
 
 public class CuentaCorrienteServicioImpl implements CuentaCorrienteServicio{
     @Override
-    public void editarSobregiro(CuentaBancaria cuenta){
+    public void editarSobregiro(CuentaBancaria cuenta, double sobregiro){
         if(cuenta instanceof CuentaCorriente) {
-            System.out.println("SOBREGIRO ACTUAL: " + ((CuentaCorriente)cuenta).getLimiteSobregiro());
-            Scanner datos = new Scanner(System.in);
-            System.out.println("ingrese el nuevo monto de sobregiro: ");
-            double sobregiro = datos.nextDouble();
+            System.out.println("SOBREGIRO ACTUAL: " + ((CuentaCorriente) cuenta).getLimiteSobregiro());
             ((CuentaCorriente)cuenta).setLimiteSobregiro(sobregiro);
             System.out.println("---------------------------------------------");
             System.out.println("### sobregiro cambiado con éxito ###");
+            System.out.println("### Nuevo monto sobregiro: "+ ((CuentaCorriente) cuenta).getLimiteSobregiro() + " usd ###");
             System.out.println("---------------------------------------------");
         } else {
             System.out.println("-------------------------------------------------------------");

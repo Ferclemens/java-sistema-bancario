@@ -8,15 +8,13 @@ import java.util.Scanner;
 
 public class CuentaDeAhorroServicioImpl implements CuentaDeAhorroServicio {
     @Override
-    public void editarIntereses(CuentaBancaria cuenta){
+    public void editarIntereses(CuentaBancaria cuenta, double nuevaTasa){
         if(cuenta instanceof CuentaDeAhorro) {
             System.out.println("TASA INTERESES ACTUAL: " + ((CuentaDeAhorro)cuenta).getIntereses());
-            Scanner datos = new Scanner(System.in);
-            System.out.println("ingrese la nueva tasa de intereses (%): ");
-            double tasaIntereses = datos.nextDouble();
-            ((CuentaDeAhorro)cuenta).setIntereses(tasaIntereses);
+            ((CuentaDeAhorro)cuenta).setIntereses(nuevaTasa);
             System.out.println("---------------------------------------------");
             System.out.println("### Tasa de intereses cambiada con éxito ###");
+            System.out.println("### Nueva Tasa de intereses: "+((CuentaDeAhorro)cuenta).getIntereses()+" usd ###");
             System.out.println("---------------------------------------------");
         } else {
             System.out.println("-------------------------------------------------------------");
