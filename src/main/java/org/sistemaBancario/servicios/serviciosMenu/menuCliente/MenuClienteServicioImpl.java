@@ -1,7 +1,6 @@
-package org.sistemaBancario.servicios;
+package org.sistemaBancario.servicios.serviciosMenu.menuCliente;
 
 import org.sistemaBancario.domain.*;
-
 import java.util.Scanner;
 
 public class MenuClienteServicioImpl implements MenuClienteServicio {
@@ -10,7 +9,7 @@ public class MenuClienteServicioImpl implements MenuClienteServicio {
     @Override
     public int proximaCuentaId(Cliente cliente) {
         System.out.println("ultimoId Cuenta = " + ultimoIdCuenta);
-        int id = 0;
+        int id = 3;
         int longitudArray = cliente.getCuentasBancarias().toArray().length;
         if(longitudArray > ultimoIdCuenta){
             ultimoIdCuenta = longitudArray + 1;
@@ -74,17 +73,17 @@ public class MenuClienteServicioImpl implements MenuClienteServicio {
                     cuentaAEliminar = cuenta;
                 }
             }
-        } else {
-            System.out.println("---------------------------------------------");
-            System.out.println("### cliente no existe ###");
-            System.out.println("---------------------------------------------");
+            if(cuentaAEliminar == null){
+                System.out.println("---------------------------------------------");
+                System.out.println("### operacion cancelada - no existe cuenta con ese ID ###");
+                System.out.println("---------------------------------------------");
+            }
         }
         return cuentaAEliminar;
     }
     @Override
-    public CuentaBancaria seleccionarCuenta(Cliente cliente) {
+    public CuentaBancaria lecturaSeleccionarCuenta(Cliente cliente) {
         CuentaBancaria cuentaSeleccionada = null;
-
         Scanner datos = new Scanner(System.in);
         System.out.println("seleccione el ID de la cuenta: ");
         int id = datos.nextInt();
@@ -95,7 +94,7 @@ public class MenuClienteServicioImpl implements MenuClienteServicio {
         }
         if (cuentaSeleccionada == null) {
             System.out.println("---------------------------------------------");
-            System.out.println("### No existe cuenta con ese ID. ###");
+            System.out.println("### operacion cancelada - No existe cuenta con ese ID. ###");
             System.out.println("---------------------------------------------");
         }
         return cuentaSeleccionada;

@@ -1,4 +1,4 @@
-package org.sistemaBancario.servicios;
+package org.sistemaBancario.servicios.serviciosMenu.menuExportarDatos;
 
 import com.opencsv.CSVWriter;
 import org.sistemaBancario.domain.Banco;
@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 public class MenuExportarDatosImpl implements MenuExportarDatos{
     public void exportarListaDeClientes(Banco banco) {
-        //Cambiar ruta para descargar en otro lado
         Scanner dato = new Scanner(System.in);
         System.out.println("Ingrese la ruta de descarga y el nombre del archivo - Ej: \n" +
                 "C:\\Users\\Fer\\Desktop\\ClientesBancoPrintline.csv" + "\nSi no elije ruta, y solo pone un nombre de archivo." +

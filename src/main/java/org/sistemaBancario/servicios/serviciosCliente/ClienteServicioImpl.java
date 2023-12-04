@@ -1,8 +1,6 @@
-package org.sistemaBancario.servicios;
+package org.sistemaBancario.servicios.serviciosCliente;
 
 import org.sistemaBancario.domain.*;
-
-import java.util.Scanner;
 
 public class ClienteServicioImpl implements ClienteServicio{
     @Override

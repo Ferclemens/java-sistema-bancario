@@ -1,6 +1,6 @@
 package org.sistemaBancario;
 
-import org.sistemaBancario.servicios.*;
+import org.sistemaBancario.servicios.serviciosMenu.MenuServicioImpl;
 
 public class App
 {
@@ -9,6 +9,6 @@ public class App
         menu.desplegarMenu();
 
         //WIP:
-        //  (-)  REFACTORIZAR.
+        //  (x)  REFACTORIZAR.
     }
 }

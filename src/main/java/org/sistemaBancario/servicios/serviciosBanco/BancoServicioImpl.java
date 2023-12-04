@@ -1,12 +1,6 @@
-package org.sistemaBancario.servicios;
+package org.sistemaBancario.servicios.serviciosBanco;
 
-import com.opencsv.CSVWriter;
 import org.sistemaBancario.domain.*;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class BancoServicioImpl implements BancoServicio {
     @Override
