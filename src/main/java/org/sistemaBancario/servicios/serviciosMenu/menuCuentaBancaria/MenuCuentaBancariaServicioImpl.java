@@ -1,9 +1,4 @@
-package org.sistemaBancario.servicios;
-
-import org.sistemaBancario.domain.Cliente;
-import org.sistemaBancario.domain.CuentaBancaria;
-import org.sistemaBancario.domain.CuentaCorriente;
-import org.sistemaBancario.domain.CuentaDeAhorro;
+package org.sistemaBancario.servicios.serviciosMenu.menuCuentaBancaria;
 
 import java.util.Scanner;
 

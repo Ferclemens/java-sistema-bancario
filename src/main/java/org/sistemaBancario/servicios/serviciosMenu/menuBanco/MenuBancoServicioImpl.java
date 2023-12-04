@@ -1,6 +1,7 @@
-package org.sistemaBancario.servicios;
+package org.sistemaBancario.servicios.serviciosMenu.menuBanco;
 
 import org.sistemaBancario.domain.*;
+import org.sistemaBancario.servicios.serviciosBanco.BancoServicioImpl;
 
 import java.util.Scanner;
 

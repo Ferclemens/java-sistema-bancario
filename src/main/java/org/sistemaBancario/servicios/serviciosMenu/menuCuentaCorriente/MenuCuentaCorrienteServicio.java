@@ -1,4 +1,4 @@
-package org.sistemaBancario.servicios;
+package org.sistemaBancario.servicios.serviciosMenu.menuCuentaCorriente;
 
 import org.sistemaBancario.domain.CuentaBancaria;
 

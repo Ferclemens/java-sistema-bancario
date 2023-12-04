@@ -1,9 +1,7 @@
-package org.sistemaBancario.servicios;
+package org.sistemaBancario.servicios.serviciosCuentaCorriente;
 
 import org.sistemaBancario.domain.CuentaBancaria;
 import org.sistemaBancario.domain.CuentaCorriente;
-
-import java.util.Scanner;
 
 public class CuentaCorrienteServicioImpl implements CuentaCorrienteServicio{
     @Override

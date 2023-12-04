@@ -1,4 +1,4 @@
-package org.sistemaBancario.servicios;
+package org.sistemaBancario.servicios.serviciosBanco;
 
 import org.sistemaBancario.domain.Banco;
 import org.sistemaBancario.domain.Cliente;

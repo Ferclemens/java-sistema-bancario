@@ -1,4 +1,4 @@
-package org.sistemaBancario.servicios;
+package org.sistemaBancario.servicios.serviciosCuentaCorriente;
 
 import org.sistemaBancario.domain.Cliente;
 import org.sistemaBancario.domain.CuentaBancaria;

@@ -1,8 +1,8 @@
-package org.sistemaBancario.servicios;
+package org.sistemaBancario.servicios.serviciosMenu.menuBanco;
 
 import org.sistemaBancario.domain.Banco;
 import org.sistemaBancario.domain.Cliente;
-import org.sistemaBancario.domain.CuentaBancaria;
+import org.sistemaBancario.servicios.serviciosBanco.BancoServicioImpl;
 
 public interface MenuBancoServicio {
     int proximoClienteId(Banco banco);

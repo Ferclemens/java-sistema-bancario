@@ -1,4 +1,4 @@
-package org.sistemaBancario.servicios;
+package org.sistemaBancario.servicios.serviciosMenu.menuCliente;
 
 import org.sistemaBancario.domain.Banco;
 import org.sistemaBancario.domain.Cliente;
@@ -8,5 +8,5 @@ public interface MenuClienteServicio {
     int proximaCuentaId(Cliente cliente);
     CuentaBancaria lecturaCuentaBancariaNueva(Cliente cliente);
     CuentaBancaria lecturaCuentaAEliminar(Cliente cliente);
-    CuentaBancaria seleccionarCuenta(Cliente cliente);
+    CuentaBancaria lecturaSeleccionarCuenta(Cliente cliente);
 }

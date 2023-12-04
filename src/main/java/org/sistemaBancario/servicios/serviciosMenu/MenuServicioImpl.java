@@ -1,22 +1,32 @@
-package org.sistemaBancario.servicios;
+package org.sistemaBancario.servicios.serviciosMenu;
 
 import org.sistemaBancario.domain.*;
+import org.sistemaBancario.servicios.serviciosBanco.BancoServicioImpl;
+import org.sistemaBancario.servicios.serviciosCliente.ClienteServicioImpl;
+import org.sistemaBancario.servicios.serviciosCuentaBancaria.CuentaBancariaServicioImpl;
+import org.sistemaBancario.servicios.serviciosCuentaCorriente.CuentaCorrienteServicioImpl;
+import org.sistemaBancario.servicios.serviciosCuentaDeAhorro.CuentaDeAhorroServicioImpl;
+import org.sistemaBancario.servicios.serviciosMenu.menuBanco.MenuBancoServicioImpl;
+import org.sistemaBancario.servicios.serviciosMenu.menuCliente.MenuClienteServicioImpl;
+import org.sistemaBancario.servicios.serviciosMenu.menuCuentaBancaria.MenuCuentaBancariaServicioImpl;
+import org.sistemaBancario.servicios.serviciosMenu.menuCuentaCorriente.MenuCuentaCorrienteServicioImpl;
+import org.sistemaBancario.servicios.serviciosMenu.menuCuentaDeAhorro.MenuCuentaDeAhorroServicioImpl;
+import org.sistemaBancario.servicios.serviciosMenu.menuExportarDatos.MenuExportarDatosImpl;
 
 import java.util.Scanner;
 
 public class MenuServicioImpl implements MenuServicio {
     public void desplegarMenu(){
         System.out.println("####### BIENVENIDOS AL BANCO PRINT-LINE ########");
-        //inicializamos el banco y los servicios
-        //Banco
+        //inicializamos el Banco
         Banco bancoPrintLine = new Banco();
-        //Servicios
+        //inicializamos los servicios
         BancoServicioImpl bancoServicio = new BancoServicioImpl();
         ClienteServicioImpl clienteServicio = new ClienteServicioImpl();
         CuentaBancariaServicioImpl cuentaServicio = new CuentaBancariaServicioImpl();
         CuentaCorrienteServicioImpl cuentaCorrienteServicio = new CuentaCorrienteServicioImpl();
         CuentaDeAhorroServicioImpl cuentaDeAhorroServicio = new CuentaDeAhorroServicioImpl();
-        //Servicios del menu
+        //inicializamos los servicios del menu
         MenuBancoServicioImpl menuBancoServicio = new MenuBancoServicioImpl();
         MenuClienteServicioImpl menuClienteServicio = new MenuClienteServicioImpl();
         MenuExportarDatosImpl menuExportarDatos = new MenuExportarDatosImpl();
@@ -24,13 +34,14 @@ public class MenuServicioImpl implements MenuServicio {
         MenuCuentaCorrienteServicioImpl menuCuentaCorrienteServicio = new MenuCuentaCorrienteServicioImpl();
         MenuCuentaDeAhorroServicioImpl menuCuentaDeAhorroServicio = new MenuCuentaDeAhorroServicioImpl();
         //hardcode de clientes
+        //cliente 1
         Cliente cliente1 = new Cliente(1,"Leo Messi","calle 123");
         bancoPrintLine.agregarCliente(cliente1);
         CuentaCorriente cuentaCliente1 = new CuentaCorriente(1,cliente1,"Cuenta corriente",2000,300.0);
         cliente1.agregarCuenta(cuentaCliente1);
         CuentaDeAhorro cuentaCliente2 = new CuentaDeAhorro(2,cliente1,"Cuenta de ahorro",8000,2.0);
         cliente1.agregarCuenta(cuentaCliente2);
-
+        //cliente 2
         Cliente cliente2 = new Cliente(2,"Fernando Clemens","Calle 321");
         CuentaDeAhorro CuentaCliente3 = new CuentaDeAhorro(3,cliente2,"Cuenta de ahorro",2000, 5.0);
         bancoPrintLine.agregarCliente(cliente2);
@@ -115,7 +126,7 @@ public class MenuServicioImpl implements MenuServicio {
                     Cliente clienteParaDepositar = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
                     if(clienteParaDepositar != null){
                         cuentaServicio.verSaldo(clienteParaDepositar);
-                        CuentaBancaria cuentaParaDeposito = menuClienteServicio.seleccionarCuenta(clienteParaDepositar);
+                        CuentaBancaria cuentaParaDeposito = menuClienteServicio.lecturaSeleccionarCuenta(clienteParaDepositar);
                         if(cuentaParaDeposito != null){
                             Double deposito = menuCuentaBancariaServicio.lecturaMontoParaDepositar();
                             cuentaServicio.depositar(cuentaParaDeposito, deposito);
@@ -132,7 +143,7 @@ public class MenuServicioImpl implements MenuServicio {
                     Cliente clienteParaRetiro = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
                     if(clienteParaRetiro != null){
                         cuentaServicio.verSaldo(clienteParaRetiro);
-                        CuentaBancaria cuentaParaRetiro = menuClienteServicio.seleccionarCuenta(clienteParaRetiro);
+                        CuentaBancaria cuentaParaRetiro = menuClienteServicio.lecturaSeleccionarCuenta(clienteParaRetiro);
                         if(cuentaParaRetiro != null){
                             Double retiro = menuCuentaBancariaServicio.lecturaMontoParaRetirar();
                             cuentaServicio.retirar(cuentaParaRetiro, retiro);
@@ -154,7 +165,7 @@ public class MenuServicioImpl implements MenuServicio {
                     Cliente clienteSeleccionadoSobregiro = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
                     if(clienteSeleccionadoSobregiro != null){
                         cuentaServicio.verSaldo(clienteSeleccionadoSobregiro);
-                        CuentaBancaria cuentaParaEditarSobregiro = menuClienteServicio.seleccionarCuenta(clienteSeleccionadoSobregiro);
+                        CuentaBancaria cuentaParaEditarSobregiro = menuClienteServicio.lecturaSeleccionarCuenta(clienteSeleccionadoSobregiro);
                         double nuevoSobregiro = 0;
                         if(cuentaParaEditarSobregiro != null) {
                             if(cuentaParaEditarSobregiro instanceof CuentaCorriente){
@@ -175,7 +186,7 @@ public class MenuServicioImpl implements MenuServicio {
                     Cliente clienteSeleccionadoIntereses = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
                     if(clienteSeleccionadoIntereses != null) {
                         cuentaServicio.verSaldo(clienteSeleccionadoIntereses);
-                        CuentaBancaria cuentaParaEditarIntereses = menuClienteServicio.seleccionarCuenta(clienteSeleccionadoIntereses);
+                        CuentaBancaria cuentaParaEditarIntereses = menuClienteServicio.lecturaSeleccionarCuenta(clienteSeleccionadoIntereses);
                         double nuevaTasaDeInteres = 0;
                         if(cuentaParaEditarIntereses != null) {
                             if(cuentaParaEditarIntereses instanceof CuentaDeAhorro){
@@ -196,7 +207,7 @@ public class MenuServicioImpl implements MenuServicio {
                     Cliente clienteSaldoConIntereses = menuBancoServicio.lecturaSeleccionarCliente(bancoPrintLine, bancoServicio);
                     if (clienteSaldoConIntereses != null) {
                         cuentaServicio.verSaldo(clienteSaldoConIntereses);
-                        CuentaBancaria cuentaParaSumarIntereses = menuClienteServicio.seleccionarCuenta(clienteSaldoConIntereses);
+                        CuentaBancaria cuentaParaSumarIntereses = menuClienteServicio.lecturaSeleccionarCuenta(clienteSaldoConIntereses);
                         if(cuentaParaSumarIntereses != null) {
                             cuentaDeAhorroServicio.SumarInteresesACuenta(cuentaParaSumarIntereses);
                         }

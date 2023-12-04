@@ -1,7 +1,6 @@
-package org.sistemaBancario.servicios;
+package org.sistemaBancario.servicios.serviciosMenu.menuCliente;
 
 import org.sistemaBancario.domain.*;
-
 import java.util.Scanner;
 
 public class MenuClienteServicioImpl implements MenuClienteServicio {
@@ -83,7 +82,7 @@ public class MenuClienteServicioImpl implements MenuClienteServicio {
         return cuentaAEliminar;
     }
     @Override
-    public CuentaBancaria seleccionarCuenta(Cliente cliente) {
+    public CuentaBancaria lecturaSeleccionarCuenta(Cliente cliente) {
         CuentaBancaria cuentaSeleccionada = null;
         Scanner datos = new Scanner(System.in);
         System.out.println("seleccione el ID de la cuenta: ");
